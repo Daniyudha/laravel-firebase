@@ -153,8 +153,6 @@ class FirebaseController extends Controller
         $temperature = $this->database->getReference('Office')->getValue()['Temperature'];
         
         return json_encode($data);
-
-        return view('home.index', compact('data'));
     }
 
     public function update()
