@@ -142,22 +142,17 @@ class FirebaseController extends Controller
 
     public function read()
     {
-        // $data = [
-		// 	'title' => 'Control Station',
-        //     "temperature" => $this->database->getReference('ESP32_APP')->getValue()['TEMPERATURE'],
-		// ];
+        // dd($this->database->getReference('Office')->getValue());
+        $data = [
+			'title' => 'Control Station',
+            "temperature" => $this->database->getReference('Office')->getValue()['Temperature'],
+            "humadity" => $this->database->getReference('Office')->getValue()['Humidity'],
+		];
         // $ref = $this->database->getReference('ESP32_APP')->getSnapshot();
         // dump($ref);
         $temperature = $this->database->getReference('Office')->getValue()['Temperature'];
-        $humidity = $this->database->getReference('Office')->getValue()['Humidity'];
-        dump($temperature);
-        dump($humidity);
-        // $ref = $this->database->getReference('ESP32_APP')->getValue();
-        // dump($ref);
-        // $ref = $this->database->getReference('ESP32_APP')->getSnapshot()->exists();
-        // dump($ref);
-
-        // return view('home.index', compact('data'));
+        
+        return json_encode($data);
     }
 
     public function update()

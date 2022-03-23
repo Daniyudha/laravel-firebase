@@ -9,7 +9,9 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg">
     <div class="collapse navbar-collapse" id="">
-        <a class="navbar-brand">Dashboard</a>
+        <a class="navbar-brand">Dashboard 
+             
+    </a>
         <ul class="navbar-nav ml-auto">
             <li class="dropdown nav-item">
                 <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
@@ -78,8 +80,9 @@
                 <div class="card card-chart">
                     <div class="card-header">
                         <h5 class="card-category">Temperature</h5>
-                        <h3 class="card-title"><i class="tim-icons icon-bell-55
-                      text-primary"></i> 60 ºC</h3>
+                        <h3 class="card-title" id="temperature"><i class="tim-icons icon-bell-55
+                      text-primary"></i> 
+                     </h3>
                     </div>
                 </div>
             </div>
@@ -87,8 +90,9 @@
                 <div class="card card-chart">
                     <div class="card-header">
                         <h5 class="card-category">Humidity</h5>
-                        <h3 class="card-title"><i class="tim-icons icon-bell-55
-                      text-primary"></i> 60 %</h3>
+                        <h3 class="card-title"  id="humidity"><i class="tim-icons icon-bell-55
+                      text-primary"></i>
+                        </h3>
                     </div>
                 </div>
             </div>
@@ -314,6 +318,29 @@
         </div>
     </div>
 </div>
+<script>
+    // console.log(fetch(`http://127.0.0.1:8000/read`))
+    
+
+    function setIntervalJs() {
+        fetch(`http://127.0.0.1:8000/read`)
+        .then(response => {
+            return response.json();
+        })
+        .then(responseJson => {
+                if(responseJson) {
+                    console.log(responseJson);
+                    document.getElementById("humidity").innerHTML = responseJson.humadity + ' %';
+                    document.getElementById("temperature").innerHTML = responseJson.temperature +' ºC';
+                    // return Promise.resolve(JSON.stringify(responseJson));
+            } else {
+                return Promise.reject(`${keyword} is not found`);
+            }
+        })
+    }
+
+    setInterval(setIntervalJs, 2000);
+</script>
 
 @endSection()
 
