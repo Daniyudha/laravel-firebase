@@ -164,7 +164,7 @@ class FirebaseController extends Controller
         // update data
         $ref = $this->database->getReference('Office')
         ->update([
-            "relay1" => "1"
+            "relay1" => "0"
             // "Lampu 1" => [
             //     "status" => "1",
             // ],
@@ -181,13 +181,13 @@ class FirebaseController extends Controller
     public function set()
     {
         // before
-        $ref = $this->database->getReference('Control')->getValue();
+        $ref = $this->database->getReference('Office')->getValue();
         dump($ref);
 
         // set data
-        $ref = $this->database->getReference('Control')
+        $ref = $this->database->getReference('Office')
         ->set([
-            "relay1" => "1"
+            "relay1" => "0"
             // "Control/relay1" => [
             //     "status" => "0",
             // ],
