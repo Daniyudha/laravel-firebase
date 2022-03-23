@@ -1,63 +1,185 @@
 .tim-row {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .tim-white-buttons {
-  background-color: #777777;
+    background-color: #777777;
 }
 
 .typography-line {
-  padding-left: 25%;
-  margin-bottom: 35px;
-  position: relative;
-  display: block;
-  width: 100%;
+    padding-left: 25%;
+    margin-bottom: 35px;
+    position: relative;
+    display: block;
+    width: 100%;
 }
 
 .typography-line span {
-  bottom: 10px;
-  color: #c0c1c2;
-  display: block;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 13px;
-  left: 0;
-  position: absolute;
-  width: 260px;
-  text-transform: none;
+    bottom: 10px;
+    color: #c0c1c2;
+    display: block;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 13px;
+    left: 0;
+    position: absolute;
+    width: 260px;
+    text-transform: none;
 }
 
 .tim-row {
-  padding-top: 60px;
+    padding-top: 60px;
 }
 
 .tim-row h3 {
-  margin-top: 0;
+    margin-top: 0;
 }
 
 .offline-doc .page-header {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .offline-doc .footer {
-  position: absolute;
-  width: 100%;
-  background: transparent;
-  bottom: 0;
-  color: #fff;
-  z-index: 1;
+    position: absolute;
+    width: 100%;
+    background: transparent;
+    bottom: 0;
+    color: #fff;
+    z-index: 1;
 }
 
 @media all and (min-width: 992px) {
-  .sidebar .nav>li.active-pro {
-    position: absolute;
-    width: 100%;
-    bottom: 10px;
-  }
+    .sidebar .nav>li.active-pro {
+        position: absolute;
+        width: 100%;
+        bottom: 10px;
+    }
 }
 
 .card.card-upgrade .card-category {
-  max-width: 530px;
-  margin: 0 auto;
+    max-width: 530px;
+    margin: 0 auto;
+}
+
+
+/* toggle switch css start */
+
+.switch-btn {
+    position: relative;
+    display: block;
+    vertical-align: top;
+    width: 80px;
+    height: 30px;
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+.checked-switch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.text-switch {
+    background-color: #d725bb;
+    border: 1px solid #d2402e;
+    border-radius: inherit;
+    color: #fff;
+    display: block;
+    font-size: 15px;
+    height: inherit;
+    position: relative;
+    text-transform: uppercase;
+}
+
+.text-switch:before,
+.text-switch:after {
+    position: absolute;
+    top: 50%;
+    margin-top: -.5em;
+    line-height: 1;
+    -webkit-transition: inherit;
+    -moz-transition: inherit;
+    -o-transition: inherit;
+    transition: inherit;
+}
+
+.text-switch:before {
+    content: attr(data-no);
+    right: 11px;
+}
+
+.text-switch:after {
+    content: attr(data-yes);
+    left: 11px;
+    color: #FFFFFF;
+    opacity: 0;
+}
+
+.checked-switch:checked~.text-switch {
+    background-color: #00f2c3;
+    border: 1px solid #068506;
+}
+
+.checked-switch:checked~.text-switch:before {
+    opacity: 0;
+}
+
+.checked-switch:checked~.text-switch:after {
+    opacity: 1;
+}
+
+.toggle-btn {
+    background: linear-gradient(#eee, #fafafa);
+    border-radius: 100%;
+    height: 28px;
+    left: 1px;
+    position: absolute;
+    top: 1px;
+    width: 28px;
+}
+
+.toggle-btn::before {
+    color: #aaaaaa;
+    content: "";
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: -2px;
+    padding: 6px 0;
+    vertical-align: middle;
+}
+
+.checked-switch:checked~.toggle-btn {
+    left: 51px;
+}
+
+.text-switch,
+.toggle-btn {
+    transition: All 0.3s ease;
+    -webkit-transition: All 0.3s ease;
+    -moz-transition: All 0.3s ease;
+    -o-transition: All 0.3s ease;
+}
+
+
+/*= add for "no-radius" =*/
+
+.no-radius,
+.no-radius .toggle-btn {
+    border-radius: 0;
+}
+
+
+/*= add for "top-to-bottom" =*/
+
+.circle-style .toggle-btn::before {
+    background: linear-gradient(#ddd, #cacaca);
+    border-radius: 50%;
+    content: "";
+    height: 14px;
+    margin-top: 7px;
+    padding: 0;
+    width: 14px;
 }

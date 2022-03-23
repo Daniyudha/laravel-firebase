@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <title>
-    judul
+        judul
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
@@ -39,7 +39,30 @@
     <script src="{{ asset('assets') }}/js/black-dashboard.min.js?v=1.0.0"></script>
     <!-- Black Dashboard DEMO methods, don't include it in your project! -->
     <script src="{{ asset('assets') }}/demo/demo.js"></script>
+
     <script>
+    var switchStatus = false;
+    $("#togBtn").on('change', function() {
+        if ($(this).is(':checked')) {
+            switchStatus = $(this).is(':checked');
+            alert(switchStatus); // To verify
+        } else {
+            switchStatus = $(this).is(':checked');
+            alert(switchStatus); // To verify
+        }
+    });
+
+    function checkbox (){
+        $.ajax({
+        url: "test.html",
+      
+        }).
+        done(function() {
+            $(this).addClass("done");
+        });
+    }
+
+
     $(document).ready(function() {
         $().ready(function() {
             $sidebar = $('.sidebar');
