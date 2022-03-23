@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('root');
 // Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('create', 'App\Http\Controllers\FirebaseController@set');
+Route::post('create', 'App\Http\Controllers\FirebaseController@set');
 Route::get('read', 'App\Http\Controllers\FirebaseController@read');
 Route::get('update', 'App\Http\Controllers\FirebaseController@update');
 Route::get('delete', 'App\Http\Controllers\FirebaseController@delete');

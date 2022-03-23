@@ -178,9 +178,10 @@ class FirebaseController extends Controller
         dump($ref);
     }
 
-    public function set()
+    public function set(Request $request)
     {
         // before
+        dd($request);
         $ref = $this->database->getReference('Office')->getValue();
         dump($ref);
 
