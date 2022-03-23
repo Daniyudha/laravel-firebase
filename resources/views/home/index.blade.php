@@ -79,7 +79,7 @@
                     <div class="card-header">
                         <h5 class="card-category">Temperature</h5>
                         <h3 class="card-title"><i class="tim-icons icon-bell-55
-                      text-primary"></i> 60 ºC</h3>
+                      text-primary"></i>{{ $temp ['temperature'] }} ºC</h3>
                     </div>
                 </div>
             </div>
@@ -88,7 +88,7 @@
                     <div class="card-header">
                         <h5 class="card-category">Humidity</h5>
                         <h3 class="card-title"><i class="tim-icons icon-bell-55
-                      text-primary"></i> 60 %</h3>
+                      text-primary"></i> {{ $temp ['humidity'] }} %</h3>
                     </div>
                 </div>
             </div>
@@ -140,11 +140,56 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card card-chart text-center">
+                    <div class="card-header">
+                        <h3 class="card-title">Action 1</h3>
+                    </div>
+                    <div class="card-body">
+                        <label class="switch-btn mx-auto">
+                            <input id="togBtn" class="checked-switch" type="checkbox" />
+                            <span class="text-switch" data-yes="ON" data-no="OFF"></span>
+                            <span class="toggle-btn"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+            <div class="card card-chart text-center">
+                    <div class="card-header">
+                        <h3 class="card-title">Action 2</h3>
+                    </div>
+                    <div class="card-body">
+                        <label class="switch-btn mx-auto">
+                            <input class="checked-switch" type="checkbox" />
+                            <span class="text-switch" data-yes="ON" data-no="OFF"></span>
+                            <span class="toggle-btn"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+            <div class="card card-chart text-center">
+                    <div class="card-header">
+                        <h3 class="card-title">Action 3</h3>
+                    </div>
+                    <div class="card-body">
+                        <label class="switch-btn mx-auto">
+                            <input class="checked-switch" type="checkbox" />
+                            <span class="text-switch" data-yes="ON" data-no="OFF"></span>
+                            <span class="toggle-btn"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-lg-4">
                 <div class="card card-chart">
                     <div class="card-header">
-                        <h5 class="card-category">Total Shipments</h5>
                         <h3 class="card-title"><i class="tim-icons icon-bell-55
                       text-primary"></i> 763,215</h3>
                     </div>

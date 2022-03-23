@@ -150,14 +150,18 @@ class FirebaseController extends Controller
         // dump($ref);
         $temperature = $this->database->getReference('Office')->getValue()['Temperature'];
         $humidity = $this->database->getReference('Office')->getValue()['Humidity'];
-        dump($temperature);
-        dump($humidity);
+        // dump($temperature);
+        // dump($humidity);
         // $ref = $this->database->getReference('ESP32_APP')->getValue();
         // dump($ref);
         // $ref = $this->database->getReference('ESP32_APP')->getSnapshot()->exists();
         // dump($ref);
 
-        // return view('home.index', compact('data'));
+        // return view('home.index', compact('temperature', 'humidity'));
+        return [
+            "temperature"=>$temperature,
+            "humidity"=>$humidity
+        ];
     }
 
     public function update()
@@ -169,7 +173,7 @@ class FirebaseController extends Controller
         // update data
         $ref = $this->database->getReference('Office')
         ->update([
-            "relay1" => "1"
+            "relay1" => "0"
             // "Lampu 1" => [
             //     "status" => "1",
             // ],
@@ -186,13 +190,13 @@ class FirebaseController extends Controller
     public function set()
     {
         // before
-        $ref = $this->database->getReference('Control')->getValue();
+        $ref = $this->database->getReference('Office')->getValue();
         dump($ref);
 
         // set data
-        $ref = $this->database->getReference('Control')
+        $ref = $this->database->getReference('Office')
         ->set([
-            "relay1" => "1"
+            "relay1" => "0"
             // "Control/relay1" => [
             //     "status" => "0",
             // ],
