@@ -181,16 +181,16 @@ class FirebaseController extends Controller
     public function set(Request $request)
     {
         // before
-        dd($request->data);
+        // dd($request->data);
         $ref = $this->database->getReference('Office')->getValue();
-        dump($ref);
+        // dump($ref);
 
         // set data
         $ref = $this->database->getReference('Office')
         ->set([
-            "relay1" => "0"
+            "relay1" => $request->data
             // "Control/relay1" => [
-            //     "status" => "0",
+            //     "status" => $request->data,
             // ],
             // "Lampu 2" => [
             //     "status" => "1",
@@ -198,8 +198,8 @@ class FirebaseController extends Controller
         ]);
 
         // after
-        $ref = $this->database->getReference('Lampu')->getValue();
-        dump($ref);
+        $ref = $this->database->getReference('Office')->getValue();
+        return json_encode($ref);
     }
     
     public function delete()
