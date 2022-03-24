@@ -57,7 +57,9 @@
             },
             type: 'POST',
             url: 'http://127.0.0.1:8000/create',
-            data: switchStatus,
+            data: {
+                data : switchStatus
+            },
 
             success: (
                 function (data) {
