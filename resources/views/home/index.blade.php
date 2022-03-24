@@ -9,9 +9,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg">
     <div class="collapse navbar-collapse" id="">
-        <a class="navbar-brand">Dashboard 
-             
-    </a>
+        <a class="navbar-brand">Weather Station Control</a>
         <ul class="navbar-nav ml-auto">
             <li class="dropdown nav-item">
                 <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
@@ -80,8 +78,7 @@
                 <div class="card card-chart">
                     <div class="card-header">
                         <h5 class="card-category">Temperature</h5>
-                        <h3 class="card-title" id="temperature"><i class="tim-icons icon-bell-55
-                      text-primary"></i> 
+                        <h3 class="card-title" id="temperature">--</i> 
                      </h3>
                     </div>
                 </div>
@@ -90,8 +87,7 @@
                 <div class="card card-chart">
                     <div class="card-header">
                         <h5 class="card-category">Humidity</h5>
-                        <h3 class="card-title"  id="humidity"><i class="tim-icons icon-bell-55
-                      text-primary"></i>
+                        <h3 class="card-title"  id="humidity">--</i>
                         </h3>
                     </div>
                 </div>

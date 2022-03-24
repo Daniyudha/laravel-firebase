@@ -7,11 +7,12 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <title>
-        judul
+        Weather Station Control
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
     <!-- Nucleo Icons -->
     <link href="{{ asset('assets') }}/css/nucleo-icons.css" rel="stylesheet" />
     <!-- CSS Files -->
@@ -28,6 +29,7 @@
     <script src="{{ asset('assets') }}/js/core/popper.min.js"></script>
     <script src="{{ asset('assets') }}/js/core/bootstrap.min.js"></script>
     <script src="{{ asset('assets') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/de65245473.js" crossorigin="anonymous"></script>
     <!--  Google Maps Plugin    -->
     <!-- Place this tag in your head or just before your close body tag. -->
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
@@ -44,22 +46,32 @@
     var switchStatus = false;
     $("#togBtn").on('change', function() {
         if ($(this).is(':checked')) {
-            switchStatus = $(this).is(':checked');
-            alert(switchStatus); // To verify
+            relay1 = "1";
+            alert(relay1);
         } else {
-            switchStatus = $(this).is(':checked');
-            alert(switchStatus); // To verify
+            relay1 = "0";
+            alert(relay1); 
         }
     });
 
-    function checkbox (){
+    function checkbox() {
         $.ajax({
-        url: "test.html",
-      
-        }).
-        done(function() {
-            $(this).addClass("done");
-        });
+            url: "/create",
+            type: "POST",
+            data: {
+                relay1: relay1
+            },
+        //     success: function(response) {
+        //         console.log(response);
+        //         if (response) {
+        //             $('.success').text(response.success);
+        //             $("#ajaxform")[0].reset();
+        //         }
+        //     },
+        //     error: function(error) {
+        //         console.log(error);
+        //     }
+        // });
     }
 
 
