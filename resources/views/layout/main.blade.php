@@ -80,11 +80,12 @@
 
     function checkbox() {
         $.ajax({
-            url: "/create",
-            type: "POST",
-            data: {
-                relay1: relay1
-            },
+        url: "test.html",
+      
+        }).
+        done(function() {
+            $(this).addClass("done");
+        });
         //     success: function(response) {
         //         console.log(response);
         //         if (response) {
