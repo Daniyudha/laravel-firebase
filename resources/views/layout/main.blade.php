@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <title>
@@ -46,12 +47,35 @@
     var switchStatus = false;
     $("#togBtn").on('change', function() {
         if ($(this).is(':checked')) {
-            relay1 = "1";
-            alert(relay1);
+            switchStatus = 1;
+            //alert(switchStatus); // To verify
         } else {
-            relay1 = "0";
-            alert(relay1); 
+            switchStatus = 0;
+            //alert(switchStatus); // To verify
         }
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'POST',
+            url: 'http://127.0.0.1:8000/create',
+            data: {
+                data : switchStatus
+            },
+
+            success: (
+                function (data) {
+                    alert(data);
+                    // $(".result").html(data);
+                    // $('.selectpicker').selectpicker({
+                    //     style: 'btn-info',
+
+                    // });
+                    // $('.preloader').hide();
+                }
+            )
+        });
+        return false;
     });
 
     function checkbox() {
