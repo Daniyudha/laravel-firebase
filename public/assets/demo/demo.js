@@ -401,6 +401,7 @@ demo = {
             }]
         };
 
+
         var myChart = new Chart(ctxGreen, {
             type: 'line',
             data: data,
@@ -410,6 +411,7 @@ demo = {
 
 
         let obj = null;
+        let humidity = null;
         function updateChart() {
             fetch(`http://127.0.0.1:8000/read`)
             .then(response => {
@@ -419,21 +421,18 @@ demo = {
                 if(responseJson) {
                         // console.log(responseJson.lampu1)
                     obj = responseJson.temperature;
-                    if (responseJson.lampu1 == "1") {
-                        document.getElementById("togBtn").checked = true;
-                    } else {
-                        document.getElementById("togBtn").checked = false;
-                    }
+                    humidity = responseJson.humadity;
+                    
                 } else {
                     return Promise.reject(`${keyword} is not found`);
                 }
             })
-            return obj;
+            // return obj;
         }
 
         setInterval(updateChart,2000);
 
-
+        console.log(humidity);
 
         // var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 
@@ -473,7 +472,75 @@ demo = {
                 }
             }
         };
-        var myChartData = new Chart( document.getElementById("chartBig1"), config);
+
+            // let element = event.target;
+
+            var config_humidity = {
+                type: 'line',
+                data : { datasets: [{
+                    label: 'Grafik Humidity',
+                    data: [],
+                    backgroundColor: gradientStroke,
+                    hoverBackgroundColor: gradientStroke,
+                    borderColor: '#1f8ef1',
+                    borderWidth: 1
+                }]
+                },
+                options: {
+                    scales : {
+                        x: {
+                            type : 'realtime',
+                            realtime : {
+                                refresh: 2000,
+                                delay: 2000,
+                                pause: false,     // chart is not paused
+                                ttl: undefined,   // data will be automatically deleted as it disappears off the chart
+                                frameRate: 30,    // data points are drawn 30 times every second
+                                onRefresh: chart => {
+                                    chart.data.datasets.forEach(dataset => {
+                                        dataset.data.push({
+                                            x: Date.now(),
+                                            y: humidity
+                                        });
+                                    })
+                                }
+                            },
+                        }, 
+                        y : {
+                            // min : 10,
+                            beginAtZero: false,
+                            ticks: {
+                                stepSize: 5
+                            }
+                        }
+                    }
+                }
+            };
+            
+            var myChartData = new Chart( document.getElementById("chartBig1"), config);
+            var myChartData2 = new Chart( document.getElementById("chartBig2"), config_humidity);
+            const temperature = document.getElementById('btn-temperature');
+            const humadity = document.getElementById('btn-humidity');
+            document.getElementById("chartBig2show").style.visibility = "hidden";
+            
+            document.getElementById("chartBig2show").style.display = "none";
+            document.addEventListener('click', (event) => {
+                if(document.getElementById('btn-humidity').matches(".active")) {
+                    document.getElementById("chartBig1show").style.visibility = "hidden";
+                    document.getElementById("chartBig1show").style.display = "none";
+
+                    document.getElementById("chartBig2show").style.display = "block";
+                    document.getElementById("chartBig2show").style.visibility = "visible";
+                }
+                if(document.getElementById('btn-temperature').matches(".active")) {           
+                    document.getElementById("chartBig1show").style.visibility = "visible";
+                    document.getElementById("chartBig1show").style.display = "block";
+                    
+                    document.getElementById("chartBig2show").style.visibility = "hidden";
+                    document.getElementById("chartBig2show").style.display = "none";
+                }
+            });
+
 
 
         var ctx = document.getElementById("CountryChart").getContext("2d");

@@ -110,28 +110,20 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                                    <label class="btn btn-sm btn-primary btn-simple active" id="0">
+                                    <label id="btn-temperature" class="btn btn-sm btn-primary btn-simple active" id="0">
                                         <input type="radio" name="options" checked>
                                         <span class="d-none d-sm-block d-md-block d-lg-block
-                            d-xl-block">Accounts</span>
+                            d-xl-block">Temperature</span>
                                         <span class="d-block d-sm-none">
                                             <i class="tim-icons icon-single-02"></i>
                                         </span>
                                     </label>
-                                    <label class="btn btn-sm btn-primary btn-simple" id="1">
+                                    <label id="btn-humidity" class="btn btn-sm btn-primary btn-simple" id="1">
                                         <input type="radio" class="d-none d-sm-none" name="options">
                                         <span class="d-none d-sm-block d-md-block d-lg-block
-                            d-xl-block">Purchases</span>
+                            d-xl-block">Humidity</span>
                                         <span class="d-block d-sm-none">
                                             <i class="tim-icons icon-gift-2"></i>
-                                        </span>
-                                    </label>
-                                    <label class="btn btn-sm btn-primary btn-simple" id="2">
-                                        <input type="radio" class="d-none" name="options">
-                                        <span class="d-none d-sm-block d-md-block d-lg-block
-                            d-xl-block">Sessions</span>
-                                        <span class="d-block d-sm-none">
-                                            <i class="tim-icons icon-tap-02"></i>
                                         </span>
                                     </label>
                                 </div>
@@ -139,9 +131,12 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="chart-area" style="position: relative; height:100vh; width:80vw">
+                        <div class="chart-area" id="chartBig1show" style="position: relative; height:100vh; width:80vw">
                             <canvas id="chartBig1" height="100vh"></canvas>
                         </div>
+                    </div>
+                    <div class="chart-area" id="chartBig2show" style="position: relative; height:100vh; width:80vw">
+                            <canvas id="chartBig2" height="100vh"></canvas>
                     </div>
                 </div>
             </div>
@@ -373,6 +368,23 @@
 <script>
 // console.log(fetch(`http://127.0.0.1:8000/read`))
 
+fetch(`http://127.0.0.1:8000/read`)
+.then(response => {
+    return response.json();
+})
+.then(responseJson => {
+    if (responseJson) {
+        console.log(responseJson);
+        if (responseJson.lampu1 == "1") {
+                        document.getElementById("togBtn").checked = true;
+                    } else {
+                        document.getElementById("togBtn").checked = false;
+                    }
+        // return Promise.resolve(JSON.stringify(responseJson));
+    } else {
+        return Promise.reject(`${keyword} is not found`);
+    }
+})
 
 function setIntervalJs() {
     fetch(`http://127.0.0.1:8000/read`)
