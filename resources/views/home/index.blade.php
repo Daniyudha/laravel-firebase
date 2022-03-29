@@ -249,16 +249,16 @@
                         <thead class="text-primary">
                             <tr>
                                 <th>
-                                    Name
+                                    Sensor Name
                                 </th>
                                 <th>
-                                    Country
+                                    Location
                                 </th>
                                 <th>
-                                    City
+                                    Temperature
                                 </th>
                                 <th class="text-center">
-                                    Salary
+                                    Humidity
                                 </th>
                             </tr>
                         </thead>
