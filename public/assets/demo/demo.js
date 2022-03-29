@@ -1,8 +1,8 @@
 type = ['primary', 'info', 'success', 'warning', 'danger'];
 
 demo = {
-    initPickColor: function() {
-        $('.pick-class-label').click(function() {
+    initPickColor: function () {
+        $('.pick-class-label').click(function () {
             var new_class = $(this).attr('new-class');
             var old_class = $('#display-buttons').attr('data-class');
             var display_div = $('#display-buttons');
@@ -15,7 +15,7 @@ demo = {
         });
     },
 
-    initDocChart: function() {
+    initDocChart: function () {
         chartColor = "#FFFFFF";
 
         // General configuration for the charts with Line gradientStroke
@@ -87,11 +87,11 @@ demo = {
             data,
             options: {
                 responsive: true,
-                scales : {
+                scales: {
                     x: {
-                        type : 'realtime'
-                    }, 
-                    y : {
+                        type: 'realtime'
+                    },
+                    y: {
                         beginAtZero: true,
                     }
                 }
@@ -99,7 +99,7 @@ demo = {
         });
     },
 
-    initDashboardPageCharts: function() {
+    initDashboardPageCharts: function () {
 
         gradientChartOptionsConfigurationWithTooltipBlue = {
             maintainAspectRatio: false,
@@ -342,47 +342,10 @@ demo = {
             }
         };
 
-        var ctx = document.getElementById("chartLinePurple").getContext("2d");
-
-        var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-
-        gradientStroke.addColorStop(1, 'rgba(72,72,176,0.2)');
-        gradientStroke.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-        gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
-
-        var data = {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        };
-
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: data,
-            options: gradientChartOptionsConfigurationWithTooltipPurple
-        });
 
 
-        var ctxGreen = document.getElementById("chartLineGreen").getContext("2d");
+        // var ctxGreen = document.getElementById("chartLineGreen").getContext("2d");
+        var ctx = document.getElementById("chartBig1").getContext("2d");;
 
         var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 
@@ -402,39 +365,39 @@ demo = {
         };
 
 
-        var myChart = new Chart(ctxGreen, {
-            type: 'line',
-            data: data,
-            options: gradientChartOptionsConfigurationWithTooltipGreen
+        // var myChart = new Chart(ctxGreen, {
+        //     type: 'line',
+        //     data: data,
+        //     options: gradientChartOptionsConfigurationWithTooltipGreen
 
-        });
+        // });
 
 
         let obj = null;
         let humidity = null;
         function updateChart() {
             fetch(`http://127.0.0.1:8000/read`)
-            .then(response => {
-                return response.json();
-            })
-            .then(responseJson => {
-                if(responseJson) {
+                .then(response => {
+                    return response.json();
+                })
+                .then(responseJson => {
+                    if (responseJson) {
                         // console.log(responseJson.lampu1)
-                    obj = responseJson.temperature;
-                    humidity = responseJson.humadity;
-                    
-                } else {
-                    return Promise.reject(`${keyword} is not found`);
-                }
-            })
+                        obj = responseJson.temperature;
+                        humidity = responseJson.humadity;
+
+                    } else {
+                        return Promise.reject(`${keyword} is not found`);
+                    }
+                })
             // return obj;
         }
 
-        setInterval(updateChart,2000);
+        setInterval(updateChart, 2000);
 
         console.log(humidity);
 
-        // var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+        var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 
         gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
         gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
@@ -443,10 +406,10 @@ demo = {
             type: 'line',
             data,
             options: {
-                scales : {
+                scales: {
                     x: {
-                        type : 'realtime',
-                        realtime : {
+                        type: 'realtime',
+                        realtime: {
                             refresh: 2000,
                             delay: 2000,
                             pause: false,     // chart is not paused
@@ -461,8 +424,8 @@ demo = {
                                 })
                             }
                         },
-                    }, 
-                    y : {
+                    },
+                    y: {
                         // min : 10,
                         beginAtZero: false,
                         ticks: {
@@ -473,11 +436,12 @@ demo = {
             }
         };
 
-            // let element = event.target;
+        // let element = event.target;
 
-            var config_humidity = {
-                type: 'line',
-                data : { datasets: [{
+        var config_humidity = {
+            type: 'line',
+            data: {
+                datasets: [{
                     label: 'Grafik Humidity',
                     data: [],
                     backgroundColor: gradientStroke,
@@ -485,65 +449,65 @@ demo = {
                     borderColor: '#1f8ef1',
                     borderWidth: 1
                 }]
-                },
-                options: {
-                    scales : {
-                        x: {
-                            type : 'realtime',
-                            realtime : {
-                                refresh: 2000,
-                                delay: 2000,
-                                pause: false,     // chart is not paused
-                                ttl: undefined,   // data will be automatically deleted as it disappears off the chart
-                                frameRate: 30,    // data points are drawn 30 times every second
-                                onRefresh: chart => {
-                                    chart.data.datasets.forEach(dataset => {
-                                        dataset.data.push({
-                                            x: Date.now(),
-                                            y: humidity
-                                        });
-                                    })
-                                }
-                            },
-                        }, 
-                        y : {
-                            // min : 10,
-                            beginAtZero: false,
-                            ticks: {
-                                stepSize: 5
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'realtime',
+                        realtime: {
+                            refresh: 2000,
+                            delay: 2000,
+                            pause: false,     // chart is not paused
+                            ttl: undefined,   // data will be automatically deleted as it disappears off the chart
+                            frameRate: 30,    // data points are drawn 30 times every second
+                            onRefresh: chart => {
+                                chart.data.datasets.forEach(dataset => {
+                                    dataset.data.push({
+                                        x: Date.now(),
+                                        y: humidity
+                                    });
+                                })
                             }
+                        },
+                    },
+                    y: {
+                        // min : 10,
+                        beginAtZero: false,
+                        ticks: {
+                            stepSize: 5
                         }
                     }
                 }
-            };
-            
-            var myChartData = new Chart( document.getElementById("chartBig1"), config);
-            var myChartData2 = new Chart( document.getElementById("chartBig2"), config_humidity);
-            const temperature = document.getElementById('btn-temperature');
-            const humadity = document.getElementById('btn-humidity');
-            document.getElementById("chartBig2show").style.visibility = "hidden";
-            
-            document.getElementById("chartBig2show").style.display = "none";
-            document.addEventListener('click', (event) => {
-                if(document.getElementById('btn-humidity').matches(".active")) {
-                    document.getElementById("chartBig1show").style.visibility = "hidden";
-                    document.getElementById("chartBig1show").style.display = "none";
+            }
+        };
 
-                    document.getElementById("chartBig2show").style.display = "block";
-                    document.getElementById("chartBig2show").style.visibility = "visible";
-                }
-                if(document.getElementById('btn-temperature').matches(".active")) {           
-                    document.getElementById("chartBig1show").style.visibility = "visible";
-                    document.getElementById("chartBig1show").style.display = "block";
-                    
-                    document.getElementById("chartBig2show").style.visibility = "hidden";
-                    document.getElementById("chartBig2show").style.display = "none";
-                }
-            });
+        var myChartData = new Chart(ctx, config);
+        var myChartData2 = new Chart(document.getElementById("chartBig2"), config_humidity);
+        const temperature = document.getElementById('btn-temperature');
+        const humadity = document.getElementById('btn-humidity');
+        document.getElementById("chartBig2show").style.visibility = "hidden";
+
+        document.getElementById("chartBig2show").style.display = "none";
+        document.addEventListener('click', (event) => {
+            if (document.getElementById('btn-humidity').matches(".active")) {
+                document.getElementById("chartBig1show").style.visibility = "hidden";
+                document.getElementById("chartBig1show").style.display = "none";
+
+                document.getElementById("chartBig2show").style.display = "block";
+                document.getElementById("chartBig2show").style.visibility = "visible";
+            }
+            if (document.getElementById('btn-temperature').matches(".active")) {
+                document.getElementById("chartBig1show").style.visibility = "visible";
+                document.getElementById("chartBig1show").style.display = "block";
+
+                document.getElementById("chartBig2show").style.visibility = "hidden";
+                document.getElementById("chartBig2show").style.display = "none";
+            }
+        });
 
 
 
-        var ctx = document.getElementById("CountryChart").getContext("2d");
+        // var ctx = document.getElementById("CountryChart").getContext("2d");
 
         var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 
@@ -577,198 +541,198 @@ demo = {
 
     },
 
-    initGoogleMaps: function() {
+    initGoogleMaps: function () {
         var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
         var mapOptions = {
             zoom: 13,
             center: myLatlng,
             scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
             styles: [{
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#1d2c4d"
-                    }]
-                },
-                {
-                    "elementType": "labels.text.fill",
-                    "stylers": [{
-                        "color": "#8ec3b9"
-                    }]
-                },
-                {
-                    "elementType": "labels.text.stroke",
-                    "stylers": [{
-                        "color": "#1a3646"
-                    }]
-                },
-                {
-                    "featureType": "administrative.country",
-                    "elementType": "geometry.stroke",
-                    "stylers": [{
-                        "color": "#4b6878"
-                    }]
-                },
-                {
-                    "featureType": "administrative.land_parcel",
-                    "elementType": "labels.text.fill",
-                    "stylers": [{
-                        "color": "#64779e"
-                    }]
-                },
-                {
-                    "featureType": "administrative.province",
-                    "elementType": "geometry.stroke",
-                    "stylers": [{
-                        "color": "#4b6878"
-                    }]
-                },
-                {
-                    "featureType": "landscape.man_made",
-                    "elementType": "geometry.stroke",
-                    "stylers": [{
-                        "color": "#334e87"
-                    }]
-                },
-                {
-                    "featureType": "landscape.natural",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#023e58"
-                    }]
-                },
-                {
-                    "featureType": "poi",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#283d6a"
-                    }]
-                },
-                {
-                    "featureType": "poi",
-                    "elementType": "labels.text.fill",
-                    "stylers": [{
-                        "color": "#6f9ba5"
-                    }]
-                },
-                {
-                    "featureType": "poi",
-                    "elementType": "labels.text.stroke",
-                    "stylers": [{
-                        "color": "#1d2c4d"
-                    }]
-                },
-                {
-                    "featureType": "poi.park",
-                    "elementType": "geometry.fill",
-                    "stylers": [{
-                        "color": "#023e58"
-                    }]
-                },
-                {
-                    "featureType": "poi.park",
-                    "elementType": "labels.text.fill",
-                    "stylers": [{
-                        "color": "#3C7680"
-                    }]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#304a7d"
-                    }]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "labels.text.fill",
-                    "stylers": [{
-                        "color": "#98a5be"
-                    }]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "labels.text.stroke",
-                    "stylers": [{
-                        "color": "#1d2c4d"
-                    }]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#2c6675"
-                    }]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "geometry.fill",
-                    "stylers": [{
-                        "color": "#9d2a80"
-                    }]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "geometry.stroke",
-                    "stylers": [{
-                        "color": "#9d2a80"
-                    }]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "labels.text.fill",
-                    "stylers": [{
-                        "color": "#b0d5ce"
-                    }]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "labels.text.stroke",
-                    "stylers": [{
-                        "color": "#023e58"
-                    }]
-                },
-                {
-                    "featureType": "transit",
-                    "elementType": "labels.text.fill",
-                    "stylers": [{
-                        "color": "#98a5be"
-                    }]
-                },
-                {
-                    "featureType": "transit",
-                    "elementType": "labels.text.stroke",
-                    "stylers": [{
-                        "color": "#1d2c4d"
-                    }]
-                },
-                {
-                    "featureType": "transit.line",
-                    "elementType": "geometry.fill",
-                    "stylers": [{
-                        "color": "#283d6a"
-                    }]
-                },
-                {
-                    "featureType": "transit.station",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#3a4762"
-                    }]
-                },
-                {
-                    "featureType": "water",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#0e1626"
-                    }]
-                },
-                {
-                    "featureType": "water",
-                    "elementType": "labels.text.fill",
-                    "stylers": [{
-                        "color": "#4e6d70"
-                    }]
-                }
+                "elementType": "geometry",
+                "stylers": [{
+                    "color": "#1d2c4d"
+                }]
+            },
+            {
+                "elementType": "labels.text.fill",
+                "stylers": [{
+                    "color": "#8ec3b9"
+                }]
+            },
+            {
+                "elementType": "labels.text.stroke",
+                "stylers": [{
+                    "color": "#1a3646"
+                }]
+            },
+            {
+                "featureType": "administrative.country",
+                "elementType": "geometry.stroke",
+                "stylers": [{
+                    "color": "#4b6878"
+                }]
+            },
+            {
+                "featureType": "administrative.land_parcel",
+                "elementType": "labels.text.fill",
+                "stylers": [{
+                    "color": "#64779e"
+                }]
+            },
+            {
+                "featureType": "administrative.province",
+                "elementType": "geometry.stroke",
+                "stylers": [{
+                    "color": "#4b6878"
+                }]
+            },
+            {
+                "featureType": "landscape.man_made",
+                "elementType": "geometry.stroke",
+                "stylers": [{
+                    "color": "#334e87"
+                }]
+            },
+            {
+                "featureType": "landscape.natural",
+                "elementType": "geometry",
+                "stylers": [{
+                    "color": "#023e58"
+                }]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "geometry",
+                "stylers": [{
+                    "color": "#283d6a"
+                }]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "labels.text.fill",
+                "stylers": [{
+                    "color": "#6f9ba5"
+                }]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "labels.text.stroke",
+                "stylers": [{
+                    "color": "#1d2c4d"
+                }]
+            },
+            {
+                "featureType": "poi.park",
+                "elementType": "geometry.fill",
+                "stylers": [{
+                    "color": "#023e58"
+                }]
+            },
+            {
+                "featureType": "poi.park",
+                "elementType": "labels.text.fill",
+                "stylers": [{
+                    "color": "#3C7680"
+                }]
+            },
+            {
+                "featureType": "road",
+                "elementType": "geometry",
+                "stylers": [{
+                    "color": "#304a7d"
+                }]
+            },
+            {
+                "featureType": "road",
+                "elementType": "labels.text.fill",
+                "stylers": [{
+                    "color": "#98a5be"
+                }]
+            },
+            {
+                "featureType": "road",
+                "elementType": "labels.text.stroke",
+                "stylers": [{
+                    "color": "#1d2c4d"
+                }]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "geometry",
+                "stylers": [{
+                    "color": "#2c6675"
+                }]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "geometry.fill",
+                "stylers": [{
+                    "color": "#9d2a80"
+                }]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "geometry.stroke",
+                "stylers": [{
+                    "color": "#9d2a80"
+                }]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "labels.text.fill",
+                "stylers": [{
+                    "color": "#b0d5ce"
+                }]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "labels.text.stroke",
+                "stylers": [{
+                    "color": "#023e58"
+                }]
+            },
+            {
+                "featureType": "transit",
+                "elementType": "labels.text.fill",
+                "stylers": [{
+                    "color": "#98a5be"
+                }]
+            },
+            {
+                "featureType": "transit",
+                "elementType": "labels.text.stroke",
+                "stylers": [{
+                    "color": "#1d2c4d"
+                }]
+            },
+            {
+                "featureType": "transit.line",
+                "elementType": "geometry.fill",
+                "stylers": [{
+                    "color": "#283d6a"
+                }]
+            },
+            {
+                "featureType": "transit.station",
+                "elementType": "geometry",
+                "stylers": [{
+                    "color": "#3a4762"
+                }]
+            },
+            {
+                "featureType": "water",
+                "elementType": "geometry",
+                "stylers": [{
+                    "color": "#0e1626"
+                }]
+            },
+            {
+                "featureType": "water",
+                "elementType": "labels.text.fill",
+                "stylers": [{
+                    "color": "#4e6d70"
+                }]
+            }
             ]
         };
 
@@ -783,7 +747,7 @@ demo = {
         marker.setMap(map);
     },
 
-    showNotification: function(from, align) {
+    showNotification: function (from, align) {
         color = Math.floor((Math.random() * 4) + 1);
 
         $.notify({
