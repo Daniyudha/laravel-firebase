@@ -30,10 +30,8 @@
     <script src="{{ asset('assets') }}/js/core/popper.min.js"></script>
     <script src="{{ asset('assets') }}/js/core/bootstrap.min.js"></script>
     <script src="{{ asset('assets') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/de65245473.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/de65245473.js" crossorigin="anonymous"></script> -->
     <!--  Google Maps Plugin    -->
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
     <!-- Chart JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/luxon@1.27.0/build/global/luxon.min.js"></script>
@@ -69,7 +67,7 @@
 
             success: (
                 function (data) {
-                    alert(data);
+                    // alert(data);
                     // $(".result").html(data);
                     // $('.selectpicker').selectpicker({
                     //     style: 'btn-info',

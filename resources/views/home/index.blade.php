@@ -78,8 +78,11 @@
                 <div class="card card-chart">
                     <div class="card-header">
                         <h5 class="card-category">Temperature</h5>
-                        <h3 class="card-title" id="temperature">--</i> 
-                     </h3>
+                        <div class="d-flex flex-row align-content-center my-3">
+                            <i class="fa fa-thermometer-half fa-2x color-lamp" aria-hidden="true"></i>
+                            <h3 class="card-title ml-2" id="temperature">--</i>
+                        </div>
+                        </h3>
                     </div>
                 </div>
             </div>
@@ -87,7 +90,10 @@
                 <div class="card card-chart">
                     <div class="card-header">
                         <h5 class="card-category">Humidity</h5>
-                        <h3 class="card-title"  id="humidity">--</i>
+                        <div class="d-flex flex-row align-content-center my-3">
+                            <i class="fa fa-thermometer-half fa-2x color-lamp" aria-hidden="true"></i>
+                            <h3 class="card-title ml-2" id="humidity">--</i>
+                        </div>
                         </h3>
                     </div>
                 </div>
@@ -145,7 +151,8 @@
             <div class="col-lg-4">
                 <div class="card card-chart text-center">
                     <div class="card-header">
-                        <h3 class="card-title">Action 1</h3>
+                        <h4 class="card-title">Lampu 1</h4>
+                        <i class="far fa-lightbulb fa-3x color-lamp"></i>
                     </div>
                     <div class="card-body">
                         <label class="switch-btn mx-auto">
@@ -159,9 +166,10 @@
                 </div>
             </div>
             <div class="col-lg-4">
-            <div class="card card-chart text-center">
+                <div class="card card-chart text-center">
                     <div class="card-header">
-                        <h3 class="card-title">Action 2</h3>
+                        <h4 class="card-title">Lampu 2</h4>
+                        <i class="far fa-lightbulb fa-3x color-lamp"></i>
                     </div>
                     <div class="card-body">
                         <label class="switch-btn mx-auto">
@@ -173,9 +181,10 @@
                 </div>
             </div>
             <div class="col-lg-4">
-            <div class="card card-chart text-center">
+                <div class="card card-chart text-center">
                     <div class="card-header">
-                        <h3 class="card-title">Action 3</h3>
+                        <h4 class="card-title">Lampu 3</h4>
+                        <i class="far fa-lightbulb fa-3x color-lamp"></i>
                     </div>
                     <div class="card-body">
                         <label class="switch-btn mx-auto">
@@ -242,16 +251,16 @@
                         <thead class="text-primary">
                             <tr>
                                 <th>
-                                    Name
+                                    Sensor Name
                                 </th>
                                 <th>
-                                    Country
+                                    Location
                                 </th>
                                 <th>
-                                    City
+                                    Temperature
                                 </th>
                                 <th class="text-center">
-                                    Salary
+                                    Humidity
                                 </th>
                             </tr>
                         </thead>
@@ -362,27 +371,27 @@
     </div>
 </div>
 <script>
-    // console.log(fetch(`http://127.0.0.1:8000/read`))
-    
+// console.log(fetch(`http://127.0.0.1:8000/read`))
 
-    function setIntervalJs() {
-        fetch(`http://127.0.0.1:8000/read`)
+
+function setIntervalJs() {
+    fetch(`http://127.0.0.1:8000/read`)
         .then(response => {
             return response.json();
         })
         .then(responseJson => {
-                if(responseJson) {
-                    console.log(responseJson);
-                    document.getElementById("humidity").innerHTML = responseJson.humadity + ' %';
-                    document.getElementById("temperature").innerHTML = responseJson.temperature +' ºC';
-                    // return Promise.resolve(JSON.stringify(responseJson));
+            if (responseJson) {
+                console.log(responseJson);
+                document.getElementById("humidity").innerHTML = responseJson.humadity + ' %';
+                document.getElementById("temperature").innerHTML = responseJson.temperature + ' ºC';
+                // return Promise.resolve(JSON.stringify(responseJson));
             } else {
                 return Promise.reject(`${keyword} is not found`);
             }
         })
-    }
+}
 
-    setInterval(setIntervalJs, 2000);
+setInterval(setIntervalJs, 2000);
 </script>
 
 @endSection()
