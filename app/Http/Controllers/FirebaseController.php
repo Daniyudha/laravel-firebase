@@ -147,6 +147,7 @@ class FirebaseController extends Controller
 			'title' => 'Control Station',
             "temperature" => $this->database->getReference('Office')->getValue()['Temperature'],
             "humadity" => $this->database->getReference('Office')->getValue()['Humidity'],
+            "lampu1" => $this->database->getReference('Office')->getValue()['relay1'],
 		];
         // $ref = $this->database->getReference('ESP32_APP')->getSnapshot();
         // dump($ref);

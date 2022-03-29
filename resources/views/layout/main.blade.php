@@ -35,7 +35,10 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
     <!-- Chart JS -->
-    <script src="{{ asset('assets') }}/js/plugins/chartjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@1.27.0/build/global/luxon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.1.0/dist/chartjs-adapter-luxon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@2.0.0/dist/chartjs-plugin-streaming.min.js"></script>
     <!--  Notifications Plugin    -->
     <script src="{{ asset('assets') }}/js/plugins/bootstrap-notify.js"></script>
     <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
@@ -44,6 +47,7 @@
     <script src="{{ asset('assets') }}/demo/demo.js"></script>
 
     <script>
+    
     var switchStatus = false;
     $("#togBtn").on('change', function() {
         if ($(this).is(':checked')) {

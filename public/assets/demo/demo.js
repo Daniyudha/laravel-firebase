@@ -72,7 +72,7 @@ demo = {
             }
         };
 
-        ctx = document.getElementById('lineChartExample').getContext("2d");
+        ctx = document.getElementById('lineChartExample');
 
         gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
         gradientStroke.addColorStop(0, '#80b6f4');
@@ -83,26 +83,19 @@ demo = {
         gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
 
         myChart = new Chart(ctx, {
-            type: 'line',
-            responsive: true,
-            data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [{
-                    label: "Active Users",
-                    borderColor: "#f96332",
-                    pointBorderColor: "#FFF",
-                    pointBackgroundColor: "#f96332",
-                    pointBorderWidth: 2,
-                    pointHoverRadius: 4,
-                    pointHoverBorderWidth: 1,
-                    pointRadius: 4,
-                    fill: true,
-                    backgroundColor: gradientFill,
-                    borderWidth: 2,
-                    data: [542, 480, 430, 550, 530, 453, 380, 434, 568, 610, 700, 630]
-                }]
-            },
-            options: gradientChartOptionsConfiguration
+            type: 'bar',
+            data,
+            options: {
+                responsive: true,
+                scales : {
+                    x: {
+                        type : 'realtime'
+                    }, 
+                    y : {
+                        beginAtZero: true,
+                    }
+                }
+            }
         });
     },
 
@@ -358,23 +351,27 @@ demo = {
         gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
 
         var data = {
-            labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
             datasets: [{
-                label: "Data",
-                fill: true,
-                backgroundColor: gradientStroke,
-                borderColor: '#d048b6',
-                borderWidth: 2,
-                borderDash: [],
-                borderDashOffset: 0.0,
-                pointBackgroundColor: '#d048b6',
-                pointBorderColor: 'rgba(255,255,255,0)',
-                pointHoverBackgroundColor: '#d048b6',
-                pointBorderWidth: 20,
-                pointHoverRadius: 4,
-                pointHoverBorderWidth: 15,
-                pointRadius: 4,
-                data: [80, 100, 70, 80, 120, 80],
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
             }]
         };
 
@@ -394,23 +391,16 @@ demo = {
         gradientStroke.addColorStop(0, 'rgba(66,134,121,0)'); //green colors
 
         var data = {
-            labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV'],
             datasets: [{
-                label: "My First dataset",
-                fill: true,
-                backgroundColor: gradientStroke,
-                borderColor: '#00d6b4',
-                borderWidth: 2,
-                borderDash: [],
-                borderDashOffset: 0.0,
-                pointBackgroundColor: '#00d6b4',
-                pointBorderColor: 'rgba(255,255,255,0)',
-                pointHoverBackgroundColor: '#00d6b4',
-                pointBorderWidth: 20,
-                pointHoverRadius: 4,
-                pointHoverBorderWidth: 15,
-                pointRadius: 4,
-                data: [90, 27, 60, 12, 80],
+                label: '# of Votes',
+                data: [],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
             }]
         };
 
@@ -422,64 +412,83 @@ demo = {
         });
 
 
+        let obj = null;
+        function updateChart() {
+            fetch(`http://127.0.0.1:8000/read`)
+            .then(response => {
+                return response.json();
+            })
+            .then(responseJson => {
+                if(responseJson) {
+                        // console.log(responseJson.temperature)
+                    obj = responseJson.temperature;
+                } else {
+                    return Promise.reject(`${keyword} is not found`);
+                }
+            })
+            return obj;
+        }
 
-        var chart_labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-        var chart_data = [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100];
+        setInterval(updateChart,2000);
 
 
-        var ctx = document.getElementById("chartBig1").getContext('2d');
 
-        var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+        // var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 
         gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
         gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
         gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
         var config = {
             type: 'line',
-            data: {
-                labels: chart_labels,
-                datasets: [{
-                    label: "My First dataset",
-                    fill: true,
-                    backgroundColor: gradientStroke,
-                    borderColor: '#d346b1',
-                    borderWidth: 2,
-                    borderDash: [],
-                    borderDashOffset: 0.0,
-                    pointBackgroundColor: '#d346b1',
-                    pointBorderColor: 'rgba(255,255,255,0)',
-                    pointHoverBackgroundColor: '#d346b1',
-                    pointBorderWidth: 20,
-                    pointHoverRadius: 4,
-                    pointHoverBorderWidth: 15,
-                    pointRadius: 4,
-                    data: chart_data,
-                }]
-            },
-            options: gradientChartOptionsConfigurationWithTooltipPurple
+            data,
+            options: {
+                scales : {
+                    x: {
+                        type : 'realtime',
+                        realtime : {
+                            refresh: 2000,
+                            delay: 2000,
+                            pause: false,     // chart is not paused
+                            ttl: undefined,   // data will be automatically deleted as it disappears off the chart
+                            frameRate: 30,    // data points are drawn 30 times every second
+                            onRefresh: chart => {
+                                chart.data.datasets.forEach(dataset => {
+                                    dataset.data.push({
+                                        x: Date.now(),
+                                        y: obj
+                                    });
+                                })
+                            }
+                        },
+                    }, 
+                    y : {
+                        beginAtZero: true,
+                    }
+                }
+            }
         };
-        var myChartData = new Chart(ctx, config);
-        $("#0").click(function() {
-            var data = myChartData.config.data;
-            data.datasets[0].data = chart_data;
-            data.labels = chart_labels;
-            myChartData.update();
-        });
-        $("#1").click(function() {
-            var chart_data = [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120];
-            var data = myChartData.config.data;
-            data.datasets[0].data = chart_data;
-            data.labels = chart_labels;
-            myChartData.update();
-        });
+        var myChartData = new Chart( document.getElementById("chartBig1"), config);
+        // $("#0").click(function() {
+        //     var data = myChartData.config.data;
+        //     data.datasets[0].data = chart_data;
+        //     data.labels = chart_labels;
+        //     myChartData.update();
+        // });
+        // $("#1").click(function() {
+        //     var chart_data = [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120];
+        //     var data = myChartData.config.data;
+        //     data.datasets[0].data = chart_data;
+        //     data.labels = chart_labels;
+        //     myChartData.update();
+        // });
 
-        $("#2").click(function() {
-            var chart_data = [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130];
-            var data = myChartData.config.data;
-            data.datasets[0].data = chart_data;
-            data.labels = chart_labels;
-            myChartData.update();
-        });
+        // $("#2").click(function() {
+        //     var chart_data = [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130];
+        //     var data = myChartData.config.data;
+        //     data.datasets[0].data = chart_data;
+        //     data.labels = chart_labels;
+        //     myChartData.update();
+        // });
 
 
         var ctx = document.getElementById("CountryChart").getContext("2d");

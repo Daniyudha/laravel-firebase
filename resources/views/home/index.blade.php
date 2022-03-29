@@ -133,8 +133,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="chart-area">
-                            <canvas id="chartBig1"></canvas>
+                        <div class="chart-area" style="position: relative; height:80vh; width:80vw">
+                            <canvas id="chartBig1" height="80vh"></canvas>
                         </div>
                     </div>
                 </div>
@@ -150,7 +150,9 @@
                     <div class="card-body">
                         <label class="switch-btn mx-auto">
                             <input id="togBtn" class="checked-switch" type="checkbox" />
-                            <span class="text-switch" data-yes="ON" data-no="OFF"></span>
+                            <span class="text-switch" data-yes="ON" data-no="OFF" 
+                            
+                            ></span>
                             <span class="toggle-btn"></span>
                         </label>
                     </div>
