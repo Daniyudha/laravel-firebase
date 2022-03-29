@@ -139,8 +139,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="chart-area" style="position: relative; height:80vh; width:80vw">
-                            <canvas id="chartBig1" height="80vh"></canvas>
+                        <div class="chart-area" style="position: relative; height:100vh; width:80vw">
+                            <canvas id="chartBig1" height="100vh"></canvas>
                         </div>
                     </div>
                 </div>

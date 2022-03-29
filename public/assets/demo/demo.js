@@ -392,14 +392,11 @@ demo = {
 
         var data = {
             datasets: [{
-                label: '# of Votes',
+                label: 'Grafik Temperature',
                 data: [],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                ],
+                backgroundColor: gradientStroke,
+                hoverBackgroundColor: gradientStroke,
+                borderColor: '#1f8ef1',
                 borderWidth: 1
             }]
         };
@@ -420,8 +417,13 @@ demo = {
             })
             .then(responseJson => {
                 if(responseJson) {
-                        // console.log(responseJson.temperature)
+                        // console.log(responseJson.lampu1)
                     obj = responseJson.temperature;
+                    if (responseJson.lampu1 == "1") {
+                        document.getElementById("togBtn").checked = true;
+                    } else {
+                        document.getElementById("togBtn").checked = false;
+                    }
                 } else {
                     return Promise.reject(`${keyword} is not found`);
                 }
@@ -462,33 +464,16 @@ demo = {
                         },
                     }, 
                     y : {
-                        beginAtZero: true,
+                        // min : 10,
+                        beginAtZero: false,
+                        ticks: {
+                            stepSize: 5
+                        }
                     }
                 }
             }
         };
         var myChartData = new Chart( document.getElementById("chartBig1"), config);
-        // $("#0").click(function() {
-        //     var data = myChartData.config.data;
-        //     data.datasets[0].data = chart_data;
-        //     data.labels = chart_labels;
-        //     myChartData.update();
-        // });
-        // $("#1").click(function() {
-        //     var chart_data = [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120];
-        //     var data = myChartData.config.data;
-        //     data.datasets[0].data = chart_data;
-        //     data.labels = chart_labels;
-        //     myChartData.update();
-        // });
-
-        // $("#2").click(function() {
-        //     var chart_data = [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130];
-        //     var data = myChartData.config.data;
-        //     data.datasets[0].data = chart_data;
-        //     data.labels = chart_labels;
-        //     myChartData.update();
-        // });
 
 
         var ctx = document.getElementById("CountryChart").getContext("2d");
