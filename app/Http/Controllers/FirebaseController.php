@@ -8,6 +8,7 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\Auth;
 use Firebase\Auth\Token\Exception\InvalidToken;
 use Kreait\Firebase\Exception\Auth\RevokedIdToken;
+use Carbon\Carbon;
 
 class FirebaseController extends Controller
 {
@@ -148,6 +149,7 @@ class FirebaseController extends Controller
             "temperature" => $this->database->getReference('Office')->getValue()['Temperature'],
             "humadity" => $this->database->getReference('Office')->getValue()['Humidity'],
             "lampu1" => $this->database->getReference('Office')->getValue()['relay1'],
+            "dateserver" => $this->database->getReference('Office')->getValue()['TIMESTAMP']
 		];
         // $ref = $this->database->getReference('ESP32_APP')->getSnapshot();
         // dump($ref);
