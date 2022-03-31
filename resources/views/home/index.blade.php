@@ -403,7 +403,7 @@ function setIntervalJs() {
         })
 }
 
-setInterval(setIntervalJs, 2000);
+setInterval(setIntervalJs, 10000);
 </script>
 
 @endSection()
