@@ -409,6 +409,11 @@ demo = {
                 scales: {
                     x: {
                         type: 'realtime',
+                        time: {
+                            displayFormats: {
+                                quarter: 'H:I:S'
+                            }
+                        },
                         realtime: {
                             refresh: 2000,
                             delay: 2000,
