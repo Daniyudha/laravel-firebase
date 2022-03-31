@@ -149,11 +149,12 @@ class FirebaseController extends Controller
             "temperature" => $this->database->getReference('Office')->getValue()['Temperature'],
             "humadity" => $this->database->getReference('Office')->getValue()['Humidity'],
             "lampu1" => $this->database->getReference('Office')->getValue()['relay1'],
-            "dateserver" => $this->database->getReference('Office')->getValue()['TIMESTAMP']
+            "dateserver" => $this->database->getReference('Office')->getValue()['TIMESTAMP'],
+            "log" => $this->database->getReference('log')->orderByChild("TIMESTAMP")->limitToLast('10')->getValue()
 		];
         // $ref = $this->database->getReference('ESP32_APP')->getSnapshot();
-        // dump($ref);
-        $temperature = $this->database->getReference('Office')->getValue()['Temperature'];
+        // dump($data['log']);
+        // $temperature = $this->database->getReference('Office')->getValue()['Temperature'];
         
         return json_encode($data);
     }
@@ -162,7 +163,7 @@ class FirebaseController extends Controller
     {
         // before
         $ref = $this->database->getReference('Office')->getValue();
-        dump($ref);
+        // dump($ref);
 
         // update data
         $ref = $this->database->getReference('Office')

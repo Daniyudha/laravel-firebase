@@ -56,8 +56,7 @@
     </div>
     </div>
 </nav>
-<div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal"
-    aria-hidden="true">
+<div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -136,7 +135,7 @@
                         </div>
                     </div>
                     <div class="chart-area" id="chartBig2show" style="position: relative; height:100vh; width:80vw">
-                            <canvas id="chartBig2" height="100vh"></canvas>
+                        <canvas id="chartBig2" height="100vh"></canvas>
                     </div>
                 </div>
             </div>
@@ -152,9 +151,7 @@
                     <div class="card-body">
                         <label class="switch-btn mx-auto">
                             <input id="togBtn" class="checked-switch" type="checkbox" />
-                            <span class="text-switch" data-yes="ON" data-no="OFF" 
-                            
-                            ></span>
+                            <span class="text-switch" data-yes="ON" data-no="OFF"></span>
                             <span class="toggle-btn"></span>
                         </label>
                     </div>
@@ -244,121 +241,20 @@
                 <div class="table-responsive">
                     <table class="table tablesorter" id="">
                         <thead class="text-primary">
-                            <tr>
                                 <th>
-                                    Sensor Name
+                                    Timestamp
                                 </th>
-                                <th>
-                                    Location
-                                </th>
-                                <th>
+                                <tH>
+                               
                                     Temperature
                                 </th>
                                 <th class="text-center">
                                     Humidity
                                 </th>
+                             
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    Dakota Rice
-                                </td>
-                                <td>
-                                    Niger
-                                </td>
-                                <td>
-                                    Oud-Turnhout
-                                </td>
-                                <td class="text-center">
-                                    $36,738
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Minerva Hooper
-                                </td>
-                                <td>
-                                    Curaçao
-                                </td>
-                                <td>
-                                    Sinaai-Waas
-                                </td>
-                                <td class="text-center">
-                                    $23,789
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Sage Rodriguez
-                                </td>
-                                <td>
-                                    Netherlands
-                                </td>
-                                <td>
-                                    Baileux
-                                </td>
-                                <td class="text-center">
-                                    $56,142
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Philip Chaney
-                                </td>
-                                <td>
-                                    Korea, South
-                                </td>
-                                <td>
-                                    Overland Park
-                                </td>
-                                <td class="text-center">
-                                    $38,735
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Doris Greene
-                                </td>
-                                <td>
-                                    Malawi
-                                </td>
-                                <td>
-                                    Feldkirchen in Kärnten
-                                </td>
-                                <td class="text-center">
-                                    $63,542
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Mason Porter
-                                </td>
-                                <td>
-                                    Chile
-                                </td>
-                                <td>
-                                    Gloucester
-                                </td>
-                                <td class="text-center">
-                                    $78,615
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Jon Porter
-                                </td>
-                                <td>
-                                    Portugal
-                                </td>
-                                <td>
-                                    Gloucester
-                                </td>
-                                <td class="text-center">
-                                    $98,615
-                                </td>
-                            </tr>
-                        </tbody>
+
                     </table>
                 </div>
             </div>
@@ -366,27 +262,8 @@
     </div>
 </div>
 <script>
-// console.log(fetch(`http://127.0.0.1:8000/read`))
+    // console.log(fetch(`http://127.0.0.1:8000/read`))
 
-fetch(`http://127.0.0.1:8000/read`)
-.then(response => {
-    return response.json();
-})
-.then(responseJson => {
-    if (responseJson) {
-        console.log(responseJson);
-        if (responseJson.lampu1 == "1") {
-                        document.getElementById("togBtn").checked = true;
-                    } else {
-                        document.getElementById("togBtn").checked = false;
-                    }
-        // return Promise.resolve(JSON.stringify(responseJson));
-    } else {
-        return Promise.reject(`${keyword} is not found`);
-    }
-})
-
-function setIntervalJs() {
     fetch(`http://127.0.0.1:8000/read`)
         .then(response => {
             return response.json();
@@ -394,16 +271,62 @@ function setIntervalJs() {
         .then(responseJson => {
             if (responseJson) {
                 console.log(responseJson);
-                document.getElementById("humidity").innerHTML = responseJson.humadity + ' %';
-                document.getElementById("temperature").innerHTML = responseJson.temperature + ' ºC';
+                if (responseJson.lampu1 == "1") {
+                    document.getElementById("togBtn").checked = true;
+                } else {
+                    document.getElementById("togBtn").checked = false;
+                }
+
+                let table = document.querySelector("table");
+                    function generateTable() {
+                        //membuat element body
+                        let tbody = document.createElement("tbody");
+                        table.appendChild(tbody);
+                        // perulangan untuk memasukan data.
+                        // for (i = 0; i < responseJson.log.length; i++) {
+                         for (const [key, value] of Object.entries(responseJson.log)) {
+                            let row = tbody.insertRow(0);
+
+                            let cell1 = row.insertCell(0);
+                            let cell2 = row.insertCell(1);
+                            let cell3 = row.insertCell(2);
+
+                            // let log = data[i]
+                            
+                            cell1.innerHTML = value.TIMESTAMP;
+                            cell2.innerHTML = value.Temperature;
+                            cell3.innerHTML = value.Humidity;
+
+                        }
+                    }
+
+                    generateTable();
                 // return Promise.resolve(JSON.stringify(responseJson));
             } else {
                 return Promise.reject(`${keyword} is not found`);
             }
         })
-}
 
-setInterval(setIntervalJs, 10000);
+    function setIntervalJs() {
+        fetch(`http://127.0.0.1:8000/read`)
+            .then(response => {
+                return response.json();
+            })
+            .then(responseJson => {
+                if (responseJson) {
+                    console.log(responseJson);
+                    document.getElementById("humidity").innerHTML = responseJson.humadity + ' %';
+                    document.getElementById("temperature").innerHTML = responseJson.temperature + ' ºC';
+                    // return Promise.resolve(JSON.stringify(responseJson));
+                    
+
+                } else {
+                    return Promise.reject(`${keyword} is not found`);
+                }
+            })
+    }
+
+    setInterval(setIntervalJs, 10000);
 </script>
 
 @endSection()
