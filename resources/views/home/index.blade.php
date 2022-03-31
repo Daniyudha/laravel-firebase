@@ -104,7 +104,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-sm-6 text-left">
-                                <h5 class="card-category">Total Shipments</h5>
+                                <h5 class="card-category">Grafik</h5>
                                 <h2 class="card-title">Performance</h2>
                             </div>
                             <div class="col-sm-6">
@@ -130,11 +130,11 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="chart-area" id="chartBig1show" style="position: relative; height:100vh; width:80vw">
+                        <div class="chart-area" id="chartBig1show" style="position: relative; height:55vh; width:80vw">
                             <canvas id="chartBig1" height="100vh"></canvas>
                         </div>
                     </div>
-                    <div class="chart-area" id="chartBig2show" style="position: relative; height:100vh; width:80vw">
+                    <div class="chart-area" id="chartBig2show" style="position: relative; height:55vh; width:80vw">
                         <canvas id="chartBig2" height="100vh"></canvas>
                     </div>
                 </div>
