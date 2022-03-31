@@ -105,7 +105,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-sm-6 text-left">
-                                <h5 class="card-category">Total Shipments</h5>
+                                <h5 class="card-category">Grafik</h5>
                                 <h2 class="card-title">Performance</h2>
                             </div>
                             <div class="col-sm-6">
@@ -131,12 +131,12 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="chart-area" id="chartBig1show" style="position: relative; height:100vh; width:80vw">
+                        <div class="chart-area" id="chartBig1show" style="position: relative; height:55vh; width:80vw">
                             <canvas id="chartBig1" height="100vh"></canvas>
                         </div>
                     </div>
-                    <div class="chart-area" id="chartBig2show" style="position: relative; height:100vh; width:80vw">
-                            <canvas id="chartBig2" height="100vh"></canvas>
+                    <div class="chart-area" id="chartBig2show" style="position: relative; height:55vh; width:80vw">
+                        <canvas id="chartBig2" height="100vh"></canvas>
                     </div>
                 </div>
             </div>
@@ -152,9 +152,7 @@
                     <div class="card-body">
                         <label class="switch-btn mx-auto">
                             <input id="togBtn" class="checked-switch" type="checkbox" />
-                            <span class="text-switch" data-yes="ON" data-no="OFF" 
-                            
-                            ></span>
+                            <span class="text-switch" data-yes="ON" data-no="OFF"></span>
                             <span class="toggle-btn"></span>
                         </label>
                     </div>
@@ -252,10 +250,13 @@
                                     Location
                                 </th>
                                 <th>
-                                    Temperature
+                                    Timestamp
                                 </th>
                                 <th class="text-center">
                                     Humidity
+                                </th>
+                                <th class="text-center">
+                                    Temperature
                                 </th>
                             </tr>
                         </thead>
@@ -269,6 +270,9 @@
                                 </td>
                                 <td>
                                     Oud-Turnhout
+                                </td>
+                                <td class="text-center">
+                                    $36,738
                                 </td>
                                 <td class="text-center">
                                     $36,738
@@ -287,6 +291,9 @@
                                 <td class="text-center">
                                     $23,789
                                 </td>
+                                <td class="text-center">
+                                    $36,738
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -300,6 +307,9 @@
                                 </td>
                                 <td class="text-center">
                                     $56,142
+                                </td>
+                                <td class="text-center">
+                                    $36,738
                                 </td>
                             </tr>
                             <tr>
@@ -315,6 +325,9 @@
                                 <td class="text-center">
                                     $38,735
                                 </td>
+                                <td class="text-center">
+                                    $36,738
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -328,6 +341,9 @@
                                 </td>
                                 <td class="text-center">
                                     $63,542
+                                </td>
+                                <td class="text-center">
+                                    $36,738
                                 </td>
                             </tr>
                             <tr>
@@ -343,6 +359,9 @@
                                 <td class="text-center">
                                     $78,615
                                 </td>
+                                <td class="text-center">
+                                    $36,738
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -357,6 +376,9 @@
                                 <td class="text-center">
                                     $98,615
                                 </td>
+                                <td class="text-center">
+                                    $36,738
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -369,22 +391,22 @@
 // console.log(fetch(`http://127.0.0.1:8000/read`))
 
 fetch(`http://127.0.0.1:8000/read`)
-.then(response => {
-    return response.json();
-})
-.then(responseJson => {
-    if (responseJson) {
-        console.log(responseJson);
-        if (responseJson.lampu1 == "1") {
-                        document.getElementById("togBtn").checked = true;
-                    } else {
-                        document.getElementById("togBtn").checked = false;
-                    }
-        // return Promise.resolve(JSON.stringify(responseJson));
-    } else {
-        return Promise.reject(`${keyword} is not found`);
-    }
-})
+    .then(response => {
+        return response.json();
+    })
+    .then(responseJson => {
+        if (responseJson) {
+            console.log(responseJson);
+            if (responseJson.lampu1 == "1") {
+                document.getElementById("togBtn").checked = true;
+            } else {
+                document.getElementById("togBtn").checked = false;
+            }
+            // return Promise.resolve(JSON.stringify(responseJson));
+        } else {
+            return Promise.reject(`${keyword} is not found`);
+        }
+    })
 
 function setIntervalJs() {
     fetch(`http://127.0.0.1:8000/read`)
