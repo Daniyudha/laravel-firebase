@@ -436,8 +436,8 @@ demo = {
                         },
                     },
                     y: {
-                        max: 50,
-                        min: 10,
+                        max: 40,
+                        min: 20,
                         beginAtZero: false,
                         ticks: {
                             stepSize: 5
