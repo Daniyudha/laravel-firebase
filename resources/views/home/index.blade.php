@@ -56,7 +56,8 @@
     </div>
     </div>
 </nav>
-<div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
+<div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -77,11 +78,23 @@
                 <div class="card card-chart">
                     <div class="card-header">
                         <h5 class="card-category">Temperature</h5>
-                        <div class="d-flex flex-row align-content-center my-3">
+                        <!-- <div class="d-flex flex-row align-content-center my-3">
                             <i class="fa fa-thermometer-half fa-2x color-lamp" aria-hidden="true"></i>
-                            <h3 class="card-title ml-2" id="temperature">--</i>
+                            <h3 class="card-title ml-2" id="temperature">--</i> </h3>
+                        </div> -->
+                        <div class="row p-3">
+                            <div class="col-8">
+                                <div class="d-flex flex-row align-content-center my-3">
+                                    <i class="fa fa-thermometer-half fa-2x color-lamp" aria-hidden="true"></i>
+                                    <h3 class="card-title ml-2" id="temperature">--</i>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <p>Min = </p>
+                                <p>Max = </p>
+                                <p>Avg = </p>
+                            </div>
                         </div>
-                        </h3>
                     </div>
                 </div>
             </div>
@@ -89,9 +102,22 @@
                 <div class="card card-chart">
                     <div class="card-header">
                         <h5 class="card-category">Humidity</h5>
-                        <div class="d-flex flex-row align-content-center my-3">
+                        <!-- <div class="d-flex flex-row align-content-center my-3">
                             <i class="fa fa-thermometer-half fa-2x color-lamp" aria-hidden="true"></i>
                             <h3 class="card-title ml-2" id="humidity">--</i>
+                        </div> -->
+                        <div class="row p-3">
+                            <div class="col-8">
+                                <div class="d-flex flex-row align-content-center my-3">
+                                    <i class="fa fa-thermometer-half fa-2x color-lamp" aria-hidden="true"></i>
+                                    <h3 class="card-title ml-2" id="humidity">--</i>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <p>Min = </p>
+                                <p>Max = </p>
+                                <p>Avg = </p>
+                            </div>
                         </div>
                         </h3>
                     </div>
@@ -130,11 +156,11 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="chart-area" id="chartBig1show" style="position: relative; height:55vh; width:80vw">
+                        <div class="chart-area" id="chartBig1show" style="position: relative; height:60vh; width:80vw">
                             <canvas id="chartBig1" height="100vh"></canvas>
                         </div>
                     </div>
-                    <div class="chart-area" id="chartBig2show" style="position: relative; height:55vh; width:80vw">
+                    <div class="chart-area" id="chartBig2show" style="position: relative; height:60vh; width:80vw">
                         <canvas id="chartBig2" height="100vh"></canvas>
                     </div>
                 </div>
@@ -235,23 +261,21 @@
 
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title"> Simple Table</h4>
+                <h4 class="card-title">Tabel Pembacaan Sensor</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table tablesorter" id="">
                         <thead class="text-primary">
-                                <th>
-                                    Timestamp
-                                </th>
-                                <tH>
-                               
-                                    Temperature
-                                </th>
-                                <th class="text-center">
-                                    Humidity
-                                </th>
-                             
+                            <th>
+                                Timestamp
+                            </th>
+                            <tH>
+                                Temperature
+                            </th>
+                            <th>
+                                Humidity
+                            </th>
                             </tr>
                         </thead>
 
@@ -262,8 +286,53 @@
     </div>
 </div>
 <script>
-    // console.log(fetch(`http://127.0.0.1:8000/read`))
+// console.log(fetch(`http://127.0.0.1:8000/read`))
 
+fetch(`http://127.0.0.1:8000/read`)
+    .then(response => {
+        return response.json();
+    })
+    .then(responseJson => {
+        if (responseJson) {
+            console.log(responseJson);
+            if (responseJson.lampu1 == "1") {
+                document.getElementById("togBtn").checked = true;
+            } else {
+                document.getElementById("togBtn").checked = false;
+            }
+
+            let table = document.querySelector("table");
+
+            function generateTable() {
+                //membuat element body
+                let tbody = document.createElement("tbody");
+                table.appendChild(tbody);
+                // perulangan untuk memasukan data.
+                // for (i = 0; i < responseJson.log.length; i++) {
+                for (const [key, value] of Object.entries(responseJson.log)) {
+                    let row = tbody.insertRow(0);
+
+                    let cell1 = row.insertCell(0);
+                    let cell2 = row.insertCell(1);
+                    let cell3 = row.insertCell(2);
+
+                    // let log = data[i]
+
+                    cell1.innerHTML = value.TIMESTAMP;
+                    cell2.innerHTML = value.Temperature + " ºC";
+                    cell3.innerHTML = value.Humidity + " %";
+
+                }
+            }
+
+            generateTable();
+            // return Promise.resolve(JSON.stringify(responseJson));
+        } else {
+            return Promise.reject(`${keyword} is not found`);
+        }
+    })
+
+function setIntervalJs() {
     fetch(`http://127.0.0.1:8000/read`)
         .then(response => {
             return response.json();
@@ -271,62 +340,18 @@
         .then(responseJson => {
             if (responseJson) {
                 console.log(responseJson);
-                if (responseJson.lampu1 == "1") {
-                    document.getElementById("togBtn").checked = true;
-                } else {
-                    document.getElementById("togBtn").checked = false;
-                }
-
-                let table = document.querySelector("table");
-                    function generateTable() {
-                        //membuat element body
-                        let tbody = document.createElement("tbody");
-                        table.appendChild(tbody);
-                        // perulangan untuk memasukan data.
-                        // for (i = 0; i < responseJson.log.length; i++) {
-                         for (const [key, value] of Object.entries(responseJson.log)) {
-                            let row = tbody.insertRow(0);
-
-                            let cell1 = row.insertCell(0);
-                            let cell2 = row.insertCell(1);
-                            let cell3 = row.insertCell(2);
-
-                            // let log = data[i]
-                            
-                            cell1.innerHTML = value.TIMESTAMP;
-                            cell2.innerHTML = value.Temperature;
-                            cell3.innerHTML = value.Humidity;
-
-                        }
-                    }
-
-                    generateTable();
+                document.getElementById("humidity").innerHTML = responseJson.humadity + ' %';
+                document.getElementById("temperature").innerHTML = responseJson.temperature + ' ºC';
                 // return Promise.resolve(JSON.stringify(responseJson));
+
+
             } else {
                 return Promise.reject(`${keyword} is not found`);
             }
         })
+}
 
-    function setIntervalJs() {
-        fetch(`http://127.0.0.1:8000/read`)
-            .then(response => {
-                return response.json();
-            })
-            .then(responseJson => {
-                if (responseJson) {
-                    console.log(responseJson);
-                    document.getElementById("humidity").innerHTML = responseJson.humadity + ' %';
-                    document.getElementById("temperature").innerHTML = responseJson.temperature + ' ºC';
-                    // return Promise.resolve(JSON.stringify(responseJson));
-                    
-
-                } else {
-                    return Promise.reject(`${keyword} is not found`);
-                }
-            })
-    }
-
-    setInterval(setIntervalJs, 10000);
+setInterval(setIntervalJs, 10000);
 </script>
 
 @endSection()

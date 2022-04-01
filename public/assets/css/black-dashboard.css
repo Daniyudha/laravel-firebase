@@ -15687,10 +15687,11 @@ hr {
     text-transform: uppercase;
 }
 
-.table-responsive {
+
+/* .table-responsive {
     overflow: scroll;
-    padding-bottom: 10px;
-}
+    padding: 10px;
+} */
 
 #tables .table-responsive {
     margin-bottom: 30px;
