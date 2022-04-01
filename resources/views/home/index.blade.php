@@ -56,7 +56,8 @@
     </div>
     </div>
 </nav>
-<div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
+<div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -83,7 +84,7 @@
                         </div> -->
                         <div class="row p-3">
                             <div class="col-8">
-                            <div class="d-flex flex-row align-content-center my-3">
+                                <div class="d-flex flex-row align-content-center my-3">
                                     <img class="icon-temphum" src="../assets/icon/temperature-icon.svg" alt="">
                                     <h3 class="card-title ml-2 my-2" id="temperature">--</i>
                                 </div>
@@ -159,10 +160,11 @@
                         <div class="chart-area" id="chartBig1show">
                             <canvas id="chartBig1"></canvas>
                         </div>
+                        <div class="chart-area" id="chartBig2show">
+                            <canvas id="chartBig2"></canvas>
+                        </div>
                     </div>
-                    <div class="chart-area" id="chartBig2show">
-                        <canvas id="chartBig2"></canvas>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -289,8 +291,27 @@
     </div>
 </div>
 <script>
-    // console.log(fetch(`http://127.0.0.1:8000/read`))
+// console.log(fetch(`http://127.0.0.1:8000/read`))
 
+fetch(`http://127.0.0.1:8000/read`)
+    .then(response => {
+        return response.json();
+    })
+    .then(responseJson => {
+        if (responseJson) {
+            console.log(responseJson);
+            if (responseJson.lampu1 == "1") {
+                document.getElementById("togBtn").checked = true;
+            } else {
+                document.getElementById("togBtn").checked = false;
+            }
+            // return Promise.resolve(JSON.stringify(responseJson));
+        } else {
+            return Promise.reject(`${keyword} is not found`);
+        }
+    })
+
+function setIntervalJs() {
     fetch(`http://127.0.0.1:8000/read`)
         .then(response => {
             return response.json();
@@ -298,88 +319,73 @@
         .then(responseJson => {
             if (responseJson) {
                 console.log(responseJson);
-                if (responseJson.lampu1 == "1") {
-                    document.getElementById("togBtn").checked = true;
-                } else {
-                    document.getElementById("togBtn").checked = false;
+                console.log('rata-rata:' + parseFloat(responseJson.avg_temperature));
+
+                document.getElementById("humidity").innerHTML = responseJson.humadity + ' %';
+                document.getElementById("temperature").innerHTML = responseJson.temperature + ' ºC';
+
+                let table = document.querySelector("table");
+
+                let tbody = "";
+
+                // console.log(tbody);
+                function generateTable() {
+                    document.getElementById('table-history').innerHTML = ''
+                    let tbody = document.getElementById("table-history");
+                    //membuat element body
+                    table.appendChild(tbody);
+
+
+
+                    for (const [key, value] of Object.entries(responseJson.log)) {
+                        let row = tbody.insertRow(0);
+
+                        let cell1 = row.insertCell(0);
+                        let cell2 = row.insertCell(1);
+                        let cell3 = row.insertCell(2);
+
+                        // let log = data[i]
+                        var date = new Date(value.TIMESTAMP);
+                        let newdate = date.getDate() +
+                            "/" + (date.getMonth() + 1) +
+                            "/" + date.getFullYear() +
+                            " " + date.getHours() +
+                            ":" + date.getMinutes() +
+                            ":" + date.getSeconds();
+                        cell1.innerHTML = newdate;
+
+                        cell2.innerHTML = value.Temperature + " ºC";
+                        cell3.innerHTML = value.Humidity + " %";
+
+                    }
                 }
-                // return Promise.resolve(JSON.stringify(responseJson));
+                document.getElementById("min-temperature").innerHTML = "Min = " + responseJson.min_temperature +
+                    ' ºC';
+
+                document.getElementById("max-temperature").innerHTML = "Max = " + responseJson.max_temperature +
+                    ' ºC';
+
+                document.getElementById("avg-temperature").innerHTML = "Avg = " + responseJson.avg_temperature
+                    .toFixed(2) + ' ºC';
+
+
+                document.getElementById("min-humidity").innerHTML = "Min = " + responseJson.min_humidity + ' %';
+
+                document.getElementById("max-humidity").innerHTML = "Max = " + responseJson.max_humidity + ' %';
+
+                document.getElementById("avg-humidity").innerHTML = "Avg = " + responseJson.avg_humidity.toFixed(
+                    2) + ' %';
+                generateTable();
+
+                // table.removeChild(tbody);
+
             } else {
                 return Promise.reject(`${keyword} is not found`);
             }
         })
+}
 
-    function setIntervalJs() {
-        fetch(`http://127.0.0.1:8000/read`)
-            .then(response => {
-                return response.json();
-            })
-            .then(responseJson => {
-                if (responseJson) {
-                    console.log(responseJson);
-                    console.log('rata-rata:'+parseFloat(responseJson.avg_temperature));
-   
-                    document.getElementById("humidity").innerHTML = responseJson.humadity + ' %';
-                    document.getElementById("temperature").innerHTML = responseJson.temperature + ' ºC';
-
-                    let table = document.querySelector("table");
-
-                    let tbody = "";
-
-                    // console.log(tbody);
-                    function generateTable() {
-                        document.getElementById('table-history').innerHTML = ''
-                        let tbody = document.getElementById("table-history");
-                        //membuat element body
-                        table.appendChild(tbody);
-
-
-
-                        for (const [key, value] of Object.entries(responseJson.log)) {
-                            let row = tbody.insertRow(0);
-
-                            let cell1 = row.insertCell(0);
-                            let cell2 = row.insertCell(1);
-                            let cell3 = row.insertCell(2);
-
-                            // let log = data[i]
-                            var date = new Date(value.TIMESTAMP);
-                            let newdate = date.getDate() +
-                                "/" + (date.getMonth() + 1) +
-                                "/" + date.getFullYear() +
-                                " " + date.getHours() +
-                                ":" + date.getMinutes() +
-                                ":" + date.getSeconds();
-                            cell1.innerHTML = newdate;
-
-                            cell2.innerHTML = value.Temperature + " ºC";
-                            cell3.innerHTML = value.Humidity + " %";
-
-                        }
-                    }
-                    document.getElementById("min-temperature").innerHTML = "Min = "+responseJson.min_temperature + ' ºC';
-                            
-                    document.getElementById("max-temperature").innerHTML = "Max = "+responseJson.max_temperature + ' ºC';
-                    
-                    document.getElementById("avg-temperature").innerHTML = "Avg = "+responseJson.avg_temperature.toFixed(2) + ' ºC';
-
-
-                    document.getElementById("min-humidity").innerHTML = "Min = "+responseJson.min_humidity + ' %';
-                    
-                    document.getElementById("max-humidity").innerHTML = "Max = "+responseJson.max_humidity + ' %';
-                    
-                    document.getElementById("avg-humidity").innerHTML = "Avg = "+responseJson.avg_humidity.toFixed(2) + ' %';
-                    generateTable();
-
-                    // table.removeChild(tbody);
-
-                } else {
-                    return Promise.reject(`${keyword} is not found`);
-                }
-            })
-    }
-
-    setInterval(setIntervalJs, 10000);
+setInterval(setIntervalJs, 10000);
 </script>
 
 @endSection()
