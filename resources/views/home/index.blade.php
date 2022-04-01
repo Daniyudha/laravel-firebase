@@ -130,11 +130,11 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="chart-area" id="chartBig1show" style="position: relative; height:55vh; width:80vw">
+                        <div class="chart-area" id="chartBig1show" style="position: relative; height:360px; width:80vw">
                             <canvas id="chartBig1" height="100vh"></canvas>
                         </div>
                     </div>
-                    <div class="chart-area" id="chartBig2show" style="position: relative; height:55vh; width:80vw">
+                    <div class="chart-area" id="chartBig2show" style="position: relative; height:360px; width:80vw">
                         <canvas id="chartBig2" height="100vh"></canvas>
                     </div>
                 </div>
@@ -235,14 +235,14 @@
 
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title"> Simple Table</h4>
+                <h4 class="card-title"> History Temperature and Humidity</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table tablesorter" id="">
                         <thead class="text-primary">
                                 <th>
-                                    Timestamp
+                                    Times
                                 </th>
                                 <tH>
                                
@@ -292,8 +292,14 @@
                             let cell3 = row.insertCell(2);
 
                             // let log = data[i]
-                            
-                            cell1.innerHTML = value.TIMESTAMP;
+                            var date = new Date(value.TIMESTAMP);
+                            let newdate = date.getDate()+
+                            "/"+(date.getMonth()+1)+
+                            "/"+date.getFullYear()+
+                            " "+date.getHours()+
+                            ":"+date.getMinutes()+
+                            ":"+date.getSeconds();
+                            cell1.innerHTML = newdate;
                             cell2.innerHTML = value.Temperature;
                             cell3.innerHTML = value.Humidity;
 
