@@ -83,10 +83,11 @@
                         </div> -->
                         <div class="row p-3">
                             <div class="col-8">
-                                <div class="d-flex flex-row align-content-center my-3">
-                                    <i class="fa fa-thermometer-half fa-2x color-lamp" aria-hidden="true"></i>
-                                    <h3 class="card-title ml-2" id="temperature">--</i>
+                            <div class="d-flex flex-row align-content-center my-3">
+                                    <img class="icon-temphum" src="../assets/icon/temperature-icon.svg" alt="">
+                                    <h3 class="card-title ml-2 my-2" id="temperature">--</i>
                                 </div>
+
                             </div>
                             <div class="col-4">
                                 <p id="min-temperature">Min = </p>
@@ -108,8 +109,8 @@
                         <div class="row p-3">
                             <div class="col-8">
                                 <div class="d-flex flex-row align-content-center my-3">
-                                    <i class="fa fa-thermometer-half fa-2x color-lamp" aria-hidden="true"></i>
-                                    <h3 class="card-title ml-2" id="humidity">--</i>
+                                    <img class="icon-temphum" src="../assets/icon/humidity-icon.svg" alt="">
+                                    <h3 class="card-title ml-2 my-2" id="humidity">--</i>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -156,11 +157,11 @@
                     </div>
                     <div class="card-body">
                         <div class="chart-area" id="chartBig1show">
-                            <canvas id="chartBig1" height="100vh"></canvas>
+                            <canvas id="chartBig1"></canvas>
                         </div>
                     </div>
                     <div class="chart-area" id="chartBig2show">
-                        <canvas id="chartBig2" height="100vh"></canvas>
+                        <canvas id="chartBig2"></canvas>
                     </div>
                 </div>
             </div>
@@ -171,7 +172,7 @@
                 <div class="card card-chart text-center">
                     <div class="card-header">
                         <h4 class="card-title">Lampu 1</h4>
-                        <i class="far fa-lightbulb fa-3x color-lamp"></i>
+                        <img class="icon-lamp" src="../assets/icon/lamp-off.svg" alt="">
                     </div>
                     <div class="card-body">
                         <label class="switch-btn mx-auto">
@@ -186,7 +187,7 @@
                 <div class="card card-chart text-center">
                     <div class="card-header">
                         <h4 class="card-title">Lampu 2</h4>
-                        <i class="far fa-lightbulb fa-3x color-lamp"></i>
+                        <img class="icon-lamp" src="../assets/icon/lamp-off.svg" alt="">
                     </div>
                     <div class="card-body">
                         <label class="switch-btn mx-auto">
@@ -201,7 +202,7 @@
                 <div class="card card-chart text-center">
                     <div class="card-header">
                         <h4 class="card-title">Lampu 3</h4>
-                        <i class="far fa-lightbulb fa-3x color-lamp"></i>
+                        <img class="icon-lamp" src="../assets/icon/lamp-off.svg" alt="">
                     </div>
                     <div class="card-body">
                         <label class="switch-btn mx-auto">
