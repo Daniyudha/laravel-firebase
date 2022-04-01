@@ -188,3 +188,13 @@
 .color-lamp {
     color: #d725bb;
 }
+
+.icon-temphum {
+    max-width: 35px;
+    height: auto;
+}
+
+.icon-lamp {
+    max-width: 60px;
+    height: auto;
+}
