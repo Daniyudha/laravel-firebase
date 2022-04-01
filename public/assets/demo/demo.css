@@ -195,6 +195,26 @@
 }
 
 .icon-lamp {
-    max-width: 60px;
+    width: 150px;
     height: auto;
+}
+
+.control-me::after {
+    content: url(../icon/lamp-off.svg);
+}
+
+#lamp1:checked~.control-me::after {
+    content: url(../icon/lamp-on.svg);
+}
+
+
+/* label {
+    background: #A5D6A7;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+} */
+
+.visually-hidden {
+    position: absolute;
+    left: -100vw;
 }

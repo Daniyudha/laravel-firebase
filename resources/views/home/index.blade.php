@@ -174,6 +174,7 @@
                 <div class="card card-chart text-center">
                     <div class="card-header">
                         <h4 class="card-title">Lampu 1</h4>
+                        <hr color="#e3e3e3">
                         <img class="icon-lamp" src="../assets/icon/lamp-off.svg" alt="">
                     </div>
                     <div class="card-body">
@@ -188,78 +189,52 @@
             <div class="col-lg-4">
                 <div class="card card-chart text-center">
                     <div class="card-header">
-                        <h4 class="card-title">Lampu 2</h4>
-                        <img class="icon-lamp" src="../assets/icon/lamp-off.svg" alt="">
+                        <h4 class="card-title mb-0 mt-2">Lampu 2</h4>
+                        <hr color="#e3e3e3">
                     </div>
-                    <div class="card-body">
+                    <div class="card-body mx-auto" id="elements2">
                         <label class="switch-btn mx-auto">
-                            <input class="checked-switch" type="checkbox" />
+                            <input id="lamp1" class="checked-switch visually-hidden" type="checkbox" />
                             <span class="text-switch" data-yes="ON" data-no="OFF"></span>
                             <span class="toggle-btn"></span>
                         </label>
+                        <input type="checkbox" id="lamp1" class="visually-hidden">
+                        <div class="control-me icon-lamp"></div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="card card-chart text-center">
                     <div class="card-header">
-                        <h4 class="card-title">Lampu 3</h4>
-                        <img class="icon-lamp" src="../assets/icon/lamp-off.svg" alt="">
+                        <h4 class="card-title mb-0 mt-2">Lampu 3</h4>
+                        <hr color="#e3e3e3">
                     </div>
-                    <div class="card-body">
+                    <div class="card-body mx-auto" id="elements3">
                         <label class="switch-btn mx-auto">
-                            <input class="checked-switch" type="checkbox" />
+                            <input id="lamp1" class="checked-switch visually-hidden" type="checkbox" />
                             <span class="text-switch" data-yes="ON" data-no="OFF"></span>
                             <span class="toggle-btn"></span>
                         </label>
+                        <input type="checkbox" id="lamp1" class="visually-hidden">
+                        <div class="control-me icon-lamp"></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <!-- <div class="col-lg-4">
-                <div class="card card-chart">
-                    <div class="card-header">
-                        <h3 class="card-title"><i class="tim-icons icon-bell-55
-                      text-primary"></i> 763,215</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-area">
-                            <canvas id="chartLinePurple"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- <div class="col-lg-4">
-                <div class="card card-chart">
-                    <div class="card-header">
-                        <h5 class="card-category">Daily Sales</h5>
-                        <h3 class="card-title"><i class="tim-icons icon-delivery-fast
-                      text-info"></i> 3,500€</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-area">
-                            <canvas id="CountryChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- <div class="col-lg-4">
-                <div class="card card-chart">
-                    <div class="card-header">
-                        <h5 class="card-category">Completed Tasks</h5>
-                        <h3 class="card-title"><i class="tim-icons icon-send
-                      text-success"></i> 12,100K</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-area">
-                            <canvas id="chartLineGreen"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-        </div>
+        <!-- <div class="card card-chart text-center">
+
+            <div class="card-body text-center" id="elements">
+                <label class="switch-btn">
+                    <input id="lamp1" class="checked-switch visually-hidden" type="checkbox" />
+                    <span class="text-switch" data-yes="ON" data-no="OFF"></span>
+                    <span class="toggle-btn"></span>
+                </label>
+                <input type="checkbox" id="lamp1" class="visually-hidden">
+                <div class="control-me icon-lamp"></div>
+            </div>
+            <h4 class="card-title">Lampu 2</h4>
+        </div> -->
 
         <div class="card">
             <div class="card-header">

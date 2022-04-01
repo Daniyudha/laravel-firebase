@@ -36,7 +36,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/luxon@1.27.0/build/global/luxon.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.1.0/dist/chartjs-adapter-luxon.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@2.0.0/dist/chartjs-plugin-streaming.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@2.0.0/dist/chartjs-plugin-streaming.min.js">
+    </script>
     <!--  Notifications Plugin    -->
     <script src="{{ asset('assets') }}/js/plugins/bootstrap-notify.js"></script>
     <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
@@ -45,7 +46,6 @@
     <script src="{{ asset('assets') }}/demo/demo.js"></script>
 
     <script>
-    
     var switchStatus = false;
     $("#togBtn").on('change', function() {
         if ($(this).is(':checked')) {
@@ -62,11 +62,11 @@
             type: 'POST',
             url: 'http://127.0.0.1:8000/create',
             data: {
-                data : switchStatus
+                data: switchStatus
             },
 
             success: (
-                function (data) {
+                function(data) {
                     // alert(data);
                     // $(".result").html(data);
                     // $('.selectpicker').selectpicker({
@@ -80,10 +80,32 @@
         return false;
     });
 
+    $('#elements2 input[type="checkbox"]').change(function() {
+
+        var checked = $(this).is(":checked");
+        if ($('#elements2 input[type="checkbox"]').attr("checked", checked)) {
+            // alert('Checked Successfully');
+        }
+
+    });
+
+    $('#elements3 input[type="checkbox"]').change(function() {
+
+        var checked = $(this).is(":checked");
+        if ($('#elements3 input[type="checkbox"]').attr("checked", checked)) {
+            // alert('Checked Successfully');
+        }
+
+    });
+
+    // $(function() {
+    //     $('#elements input[type="checkbox"]').prop("checked", 1).trigger("change");
+    // });
+
     function checkbox() {
         $.ajax({
-        url: "test.html",
-      
+            url: "test.html",
+
         }).
         done(function() {
             $(this).addClass("done");
