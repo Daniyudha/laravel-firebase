@@ -156,11 +156,11 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="chart-area" id="chartBig1show" style="position: relative; height:60vh; width:80vw">
+                        <div class="chart-area" id="chartBig1show" style="position: relative; height:360px; width:80vw">
                             <canvas id="chartBig1" height="100vh"></canvas>
                         </div>
                     </div>
-                    <div class="chart-area" id="chartBig2show" style="position: relative; height:60vh; width:80vw">
+                    <div class="chart-area" id="chartBig2show" style="position: relative; height:360px; width:80vw">
                         <canvas id="chartBig2" height="100vh"></canvas>
                     </div>
                 </div>
@@ -340,8 +340,14 @@ function setIntervalJs() {
         .then(responseJson => {
             if (responseJson) {
                 console.log(responseJson);
+                if (responseJson.lampu1 == "1") {
+                    document.getElementById("togBtn").checked = true;
+                } else {
+                    document.getElementById("togBtn").checked = false;
+                }
                 document.getElementById("humidity").innerHTML = responseJson.humadity + ' %';
                 document.getElementById("temperature").innerHTML = responseJson.temperature + ' ºC';
+
                 // return Promise.resolve(JSON.stringify(responseJson));
 
 
