@@ -150,13 +150,13 @@ class FirebaseController extends Controller
             "humadity" => $this->database->getReference('Office')->getValue()['Humidity'],
             "lampu1" => $this->database->getReference('Office')->getValue()['relay1'],
             "dateserver" => $this->database->getReference('Office')->getValue()['TIMESTAMP'],
-            "log" => $this->database->getReference('log')->orderByChild("TIMESTAMP")->limitToLast('10')->getValue()
+            "log" => $this->database->getReference('log')->orderByChild("TIMESTAMP")->limitToLast('20')->getValue()
 		];
         // $ref = $this->database->getReference('ESP32_APP')->getSnapshot();
         // dump($data['log']);
         // $temperature = $this->database->getReference('Office')->getValue()['Temperature'];
         
-        return json_encode($data);
+        return response()->json($data);
     }
 
     public function update()

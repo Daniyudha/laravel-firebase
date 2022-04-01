@@ -56,8 +56,7 @@
     </div>
     </div>
 </nav>
-<div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal"
-    aria-hidden="true">
+<div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -90,9 +89,9 @@
                                 </div>
                             </div>
                             <div class="col-4">
-                                <p>Min = </p>
-                                <p>Max = </p>
-                                <p>Avg = </p>
+                                <p id="min-temperature">Min = </p>
+                                <p id="max-temperature">Max = </p>
+                                <p id="avg-temperature">Avg = </p>
                             </div>
                         </div>
                     </div>
@@ -278,6 +277,9 @@
                             </th>
                             </tr>
                         </thead>
+                        <tbody id="table-history">
+
+                        </tbody>
 
                     </table>
                 </div>
@@ -286,60 +288,8 @@
     </div>
 </div>
 <script>
-// console.log(fetch(`http://127.0.0.1:8000/read`))
+    // console.log(fetch(`http://127.0.0.1:8000/read`))
 
-fetch(`http://127.0.0.1:8000/read`)
-    .then(response => {
-        return response.json();
-    })
-    .then(responseJson => {
-        if (responseJson) {
-            console.log(responseJson);
-            if (responseJson.lampu1 == "1") {
-                document.getElementById("togBtn").checked = true;
-            } else {
-                document.getElementById("togBtn").checked = false;
-            }
-
-            let table = document.querySelector("table");
-
-            function generateTable() {
-                //membuat element body
-                let tbody = document.createElement("tbody");
-                table.appendChild(tbody);
-                // perulangan untuk memasukan data.
-                // for (i = 0; i < responseJson.log.length; i++) {
-                for (const [key, value] of Object.entries(responseJson.log)) {
-                    let row = tbody.insertRow(0);
-
-                    let cell1 = row.insertCell(0);
-                    let cell2 = row.insertCell(1);
-                    let cell3 = row.insertCell(2);
-
-                    // let log = data[i]
-                    var date = new Date(value.TIMESTAMP);
-                    let newdate = date.getDate()+
-                    "/"+(date.getMonth()+1)+
-                    "/"+date.getFullYear()+
-                    " "+date.getHours()+
-                    ":"+date.getMinutes()+
-                    ":"+date.getSeconds();
-                    cell1.innerHTML = newdate;
-
-                    cell2.innerHTML = value.Temperature + " ºC";
-                    cell3.innerHTML = value.Humidity + " %";
-
-                }
-            }
-
-            generateTable();
-            // return Promise.resolve(JSON.stringify(responseJson));
-        } else {
-            return Promise.reject(`${keyword} is not found`);
-        }
-    })
-
-function setIntervalJs() {
     fetch(`http://127.0.0.1:8000/read`)
         .then(response => {
             return response.json();
@@ -352,19 +302,75 @@ function setIntervalJs() {
                 } else {
                     document.getElementById("togBtn").checked = false;
                 }
-                document.getElementById("humidity").innerHTML = responseJson.humadity + ' %';
-                document.getElementById("temperature").innerHTML = responseJson.temperature + ' ºC';
-
                 // return Promise.resolve(JSON.stringify(responseJson));
-
-
             } else {
                 return Promise.reject(`${keyword} is not found`);
             }
         })
-}
 
-setInterval(setIntervalJs, 10000);
+    function setIntervalJs() {
+        fetch(`http://127.0.0.1:8000/read`)
+            .then(response => {
+                return response.json();
+            })
+            .then(responseJson => {
+                if (responseJson) {
+                    console.log(responseJson);
+   
+                    document.getElementById("humidity").innerHTML = responseJson.humadity + ' %';
+                    document.getElementById("temperature").innerHTML = responseJson.temperature + ' ºC';
+
+                    let table = document.querySelector("table");
+
+                    let tbody = "";
+
+                    // console.log(tbody);
+                    function generateTable() {
+                        document.getElementById('table-history').innerHTML = ''
+                        let tbody = document.getElementById("table-history");
+                        //membuat element body
+                        table.appendChild(tbody);
+
+
+
+                        for (const [key, value] of Object.entries(responseJson.log)) {
+                            let row = tbody.insertRow(0);
+
+                            let cell1 = row.insertCell(0);
+                            let cell2 = row.insertCell(1);
+                            let cell3 = row.insertCell(2);
+
+                            // let log = data[i]
+                            var date = new Date(value.TIMESTAMP);
+                            let newdate = date.getDate() +
+                                "/" + (date.getMonth() + 1) +
+                                "/" + date.getFullYear() +
+                                " " + date.getHours() +
+                                ":" + date.getMinutes() +
+                                ":" + date.getSeconds();
+                            cell1.innerHTML = newdate;
+
+                            cell2.innerHTML = value.Temperature + " ºC";
+                            cell3.innerHTML = value.Humidity + " %";
+
+                            document.getElementById("min-temperature").innerHTML = "-";
+                            
+                            document.getElementById("max-temperature").innerHTML = "-";
+                            
+                            document.getElementById("avg-temperature").innerHTML = '-';
+                        }
+                    }
+                    generateTable();
+
+                    // table.removeChild(tbody);
+
+                } else {
+                    return Promise.reject(`${keyword} is not found`);
+                }
+            })
+    }
+
+    setInterval(setIntervalJs, 10000);
 </script>
 
 @endSection()
