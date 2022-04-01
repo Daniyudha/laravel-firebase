@@ -114,9 +114,9 @@
                                 </div>
                             </div>
                             <div class="col-4">
-                                <p>Min = </p>
-                                <p>Max = </p>
-                                <p>Avg = </p>
+                                <p id="min-humidity">Min = </p>
+                                <p id="max-humidity">Max = </p>
+                                <p id="avg-humidity">Avg = </p>
                             </div>
                         </div>
                         </h3>
@@ -261,7 +261,7 @@
 
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Tabel Pembacaan Sensor</h4>
+                <h4 class="card-title">Tabel Pembacaan Sensor 20 Terakhir</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -317,6 +317,7 @@
             .then(responseJson => {
                 if (responseJson) {
                     console.log(responseJson);
+                    console.log('rata-rata:'+parseFloat(responseJson.avg_temperature));
    
                     document.getElementById("humidity").innerHTML = responseJson.humadity + ' %';
                     document.getElementById("temperature").innerHTML = responseJson.temperature + ' ºC';
@@ -354,13 +355,20 @@
                             cell2.innerHTML = value.Temperature + " ºC";
                             cell3.innerHTML = value.Humidity + " %";
 
-                            document.getElementById("min-temperature").innerHTML = "-";
-                            
-                            document.getElementById("max-temperature").innerHTML = "-";
-                            
-                            document.getElementById("avg-temperature").innerHTML = '-';
                         }
                     }
+                    document.getElementById("min-temperature").innerHTML = "Min = "+responseJson.min_temperature + ' ºC';
+                            
+                    document.getElementById("max-temperature").innerHTML = "Max = "+responseJson.max_temperature + ' ºC';
+                    
+                    document.getElementById("avg-temperature").innerHTML = "Avg = "+responseJson.avg_temperature.toFixed(2) + ' ºC';
+
+
+                    document.getElementById("min-humidity").innerHTML = "Min = "+responseJson.min_humidity + ' %';
+                    
+                    document.getElementById("max-humidity").innerHTML = "Max = "+responseJson.max_humidity + ' %';
+                    
+                    document.getElementById("avg-humidity").innerHTML = "Avg = "+responseJson.avg_humidity.toFixed(2) + ' %';
                     generateTable();
 
                     // table.removeChild(tbody);

@@ -152,10 +152,24 @@ class FirebaseController extends Controller
             "dateserver" => $this->database->getReference('Office')->getValue()['TIMESTAMP'],
             "log" => $this->database->getReference('log')->orderByChild("TIMESTAMP")->limitToLast('20')->getValue()
 		];
-        // $ref = $this->database->getReference('ESP32_APP')->getSnapshot();
-        // dump($data['log']);
-        // $temperature = $this->database->getReference('Office')->getValue()['Temperature'];
-        
+
+        $total_temperature = [];
+        $count_temperature = 0;
+        $total_humidity = [];
+        foreach($data['log'] as $key => $value){
+            $total_temperature[] = $value['Temperature'];
+            // $count_temperature = count($value);
+            $total_humidity[] = $value['Humidity'];
+        }
+        $data["min_temperature"] =  min($total_temperature);
+        $data["max_temperature"] = max($total_temperature);
+        $data["avg_temperature"] = array_sum($total_temperature)/count($total_temperature);
+
+        $data["min_humidity"] =  min($total_humidity);
+        $data["max_humidity"] = max($total_humidity);
+        $data["avg_humidity"] = array_sum($total_humidity)/count($total_humidity);
+
+        // dd($data);
         return response()->json($data);
     }
 
