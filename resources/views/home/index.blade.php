@@ -156,11 +156,11 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="chart-area" id="chartBig1show" style="position: relative; height:360px; width:80vw">
+                        <div class="chart-area" id="chartBig1show">
                             <canvas id="chartBig1" height="100vh"></canvas>
                         </div>
                     </div>
-                    <div class="chart-area" id="chartBig2show" style="position: relative; height:360px; width:80vw">
+                    <div class="chart-area" id="chartBig2show">
                         <canvas id="chartBig2" height="100vh"></canvas>
                     </div>
                 </div>
