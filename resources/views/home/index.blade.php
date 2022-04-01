@@ -317,8 +317,15 @@ fetch(`http://127.0.0.1:8000/read`)
                     let cell3 = row.insertCell(2);
 
                     // let log = data[i]
+                    var date = new Date(value.TIMESTAMP);
+                    let newdate = date.getDate()+
+                    "/"+(date.getMonth()+1)+
+                    "/"+date.getFullYear()+
+                    " "+date.getHours()+
+                    ":"+date.getMinutes()+
+                    ":"+date.getSeconds();
+                    cell1.innerHTML = newdate;
 
-                    cell1.innerHTML = value.TIMESTAMP;
                     cell2.innerHTML = value.Temperature + " ºC";
                     cell3.innerHTML = value.Humidity + " %";
 
