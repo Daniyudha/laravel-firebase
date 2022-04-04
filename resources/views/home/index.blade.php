@@ -175,14 +175,15 @@
                     <div class="card-header">
                         <h4 class="card-title">Lampu 1</h4>
                         <hr color="#e3e3e3">
-                        <img class="icon-lamp" src="../assets/icon/lamp-off.svg" alt="">
                     </div>
-                    <div class="card-body">
+                    <div class="card-body mx-auto" id="elements1">
                         <label class="switch-btn mx-auto">
-                            <input id="togBtn" class="checked-switch" type="checkbox" />
+                            <input id="togBtn" class="checked-switch visually-hidden togBtn" type="checkbox" />
                             <span class="text-switch" data-yes="ON" data-no="OFF"></span>
                             <span class="toggle-btn"></span>
                         </label>
+                        <input type="checkbox" id="togBtn" class="visually-hidden togBtn">
+                        <div class="control-me icon-lamp"></div>
                     </div>
                 </div>
             </div>
@@ -276,9 +277,9 @@ fetch(`http://127.0.0.1:8000/read`)
         if (responseJson) {
             console.log(responseJson);
             if (responseJson.lampu1 == "1") {
-                document.getElementById("togBtn").checked = true;
+                $(".togBtn").prop('checked', true);
             } else {
-                document.getElementById("togBtn").checked = false;
+                $(".togBtn").prop('checked', false);
             }
             // return Promise.resolve(JSON.stringify(responseJson));
         } else {

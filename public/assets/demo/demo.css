@@ -207,6 +207,10 @@
     content: url(../icon/lamp-on.svg);
 }
 
+#togBtn:checked~.control-me::after {
+    content: url(../icon/lamp-on.svg);
+}
+
 
 /* label {
     background: #A5D6A7;

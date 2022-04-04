@@ -80,6 +80,15 @@
         return false;
     });
 
+    $('#elements1 input[type="checkbox"]').change(function() {
+
+        var checked = $(this).is(":checked");
+        if ($('#elements1 input[type="checkbox"]').attr("checked", checked)) {
+            // alert('Checked Successfully');
+        }
+
+    });
+
     $('#elements2 input[type="checkbox"]').change(function() {
 
         var checked = $(this).is(":checked");
