@@ -146,10 +146,10 @@ class FirebaseController extends Controller
         // dd($this->database->getReference('Office')->getValue());
         $data = [
 			'title' => 'Control Station',
-            "temperature" => $this->database->getReference('Office')->getValue()['Temperature'],
-            "humadity" => $this->database->getReference('Office')->getValue()['Humidity'],
-            "lampu1" => $this->database->getReference('Office')->getValue()['relay1'],
-            "dateserver" => $this->database->getReference('Office')->getValue()['TIMESTAMP'],
+            "temperature" => $this->database->getReference('Monitoring')->getValue()['Temperature'],
+            "humadity" => $this->database->getReference('Monitoring')->getValue()['Humidity'],
+            "lampu1" => $this->database->getReference('Control')->getValue()['relay1'],
+            "dateserver" => $this->database->getReference('Monitoring')->getValue()['TIMESTAMP'],
             "log" => $this->database->getReference('log')->orderByChild("TIMESTAMP")->limitToLast('20')->getValue()
 		];
 
@@ -200,11 +200,11 @@ class FirebaseController extends Controller
     {
         // before
         // dd($request->data);
-        $ref = $this->database->getReference('Office')->getValue();
+        $ref = $this->database->getReference('Control')->getValue();
         // dump($ref);
 
         // set data
-        $ref = $this->database->getReference('Office')
+        $ref = $this->database->getReference('Control')
         ->set([
             "relay1" => $request->data
             // "Control/relay1" => [
@@ -216,7 +216,7 @@ class FirebaseController extends Controller
         ]);
 
         // after
-        $ref = $this->database->getReference('Office')->getValue();
+        $ref = $this->database->getReference('Control')->getValue();
         return json_encode($ref);
     }
     
