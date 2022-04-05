@@ -80,14 +80,36 @@
         return false;
     });
 
+
+
     $('#elements1 input[type="checkbox"]').change(function() {
 
-        var checked = $(this).is(":checked");
-        if ($('#elements1 input[type="checkbox"]').attr("checked", checked)) {
-            // alert('Checked Successfully');
+        //var checked = $(this).is(":checked");
+        if($(this).is(":checked")) {
+            document.getElementById("togBtn2").checked = true;
+        } else {
+            document.getElementById("togBtn2").checked = false;
         }
 
     });
+
+    fetch(`http://127.0.0.1:8000/read`)
+    .then(response => {
+        return response.json();
+    })
+    .then(responseJson => {
+        if (responseJson) {
+            console.log(responseJson);
+            if (responseJson.lampu1 == "1") {
+                $(".togBtn").prop('checked', true);
+            } else {
+                $(".togBtn").prop('checked', false);
+            }
+            // return Promise.resolve(JSON.stringify(responseJson));
+        } else {
+            return Promise.reject(`${keyword} is not found`);
+        }
+    })
 
     $('#elements2 input[type="checkbox"]').change(function() {
 

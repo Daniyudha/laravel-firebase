@@ -207,7 +207,7 @@
     content: url(../icon/lamp-on.svg);
 }
 
-#togBtn:checked~.control-me::after {
+#togBtn2:checked~.control-me::after {
     content: url(../icon/lamp-on.svg);
 }
 

@@ -182,7 +182,7 @@
                             <span class="text-switch" data-yes="ON" data-no="OFF"></span>
                             <span class="toggle-btn"></span>
                         </label>
-                        <input type="checkbox" id="togBtn" class="visually-hidden togBtn">
+                        <input type="checkbox" id="togBtn2" class="visually-hidden togBtn">
                         <div class="control-me icon-lamp"></div>
                     </div>
                 </div>
@@ -268,24 +268,6 @@
 </div>
 <script>
 // console.log(fetch(`http://127.0.0.1:8000/read`))
-
-fetch(`http://127.0.0.1:8000/read`)
-    .then(response => {
-        return response.json();
-    })
-    .then(responseJson => {
-        if (responseJson) {
-            console.log(responseJson);
-            if (responseJson.lampu1 == "1") {
-                $(".togBtn").prop('checked', true);
-            } else {
-                $(".togBtn").prop('checked', false);
-            }
-            // return Promise.resolve(JSON.stringify(responseJson));
-        } else {
-            return Promise.reject(`${keyword} is not found`);
-        }
-    })
 
 function setIntervalJs() {
     fetch(`http://127.0.0.1:8000/read`)
