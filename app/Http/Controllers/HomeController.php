@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\FirebaseController;
+use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -26,21 +27,29 @@ class HomeController extends Controller
 
 	public function home()
 	{
-		$data = [
-			'title' => 'Control Station',
-			'temp' => $this->FirebaseController->read()
-		];
+		session_start();
+		if (isset($_SESSION['login'])) {
+			$data = [
+				'title' => 'Control Station',
+				'temp' => $this->FirebaseController->read()
+			];
 
-		return view('home.index', $data);
+			return view('home.index', $data);
+		} else {
+			return Redirect::to('/');
+		}
 	}
 
 	public  function doLogout()
 	{
+
+		session_start();
+		session_destroy();
 		Auth::logout(); // logging out user
 		return Redirect::to('/'); // redirection to login screen
 	}
 
-	public function doLogin(Request $request)
+	public function doLogin(HttpRequest $request)
 	{
 		// Creating Rules for Email and Password
 		$rules = array(
@@ -55,9 +64,16 @@ class HomeController extends Controller
 			return Redirect::to('/')->withErrors($validator) // send back all errors to the login form
 				->withInput(Request::except('password')); // send back the input (not the password) so that we can repopulate the form
 		} else {
-			if ($request->email = 'admin@mail.com' && $request->password = 'password123') {
-				Session::put('login', 'auth');
+			// dd($request->email);
+			if ($request->email == 'admin@mail.com' && $request->password == 'password123') {
+				// Session::set('login', $request->email);
+				session_start();
+				session('login', $request->email);
+				$_SESSION['login'] = $request->email;
 				return redirect('home');
+			} else {
+				return Redirect::to('/')->withErrors($validator) // send back all errors to the login form
+					->withInput(Request::except('password'));
 			}
 		}
 	}
