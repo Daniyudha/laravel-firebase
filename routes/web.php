@@ -20,7 +20,9 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [HomeController::class, 'index'])->name('root');
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::post('/login', [HomeController::class, 'doLogin'])->name('doLogin');
+Route::get('/home', [HomeController::class, 'home'])->name('home');
+Route::get('/logout', [HomeController::class, 'doLogout'])->name('doLogout');
 
 Route::post('create', 'App\Http\Controllers\FirebaseController@set');
 Route::get('read', 'App\Http\Controllers\FirebaseController@read');

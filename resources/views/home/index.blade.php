@@ -41,14 +41,14 @@
                     </div>
                     <b class="caret d-none d-lg-block d-xl-block"></b>
                     <p class="d-lg-none">
-                        Log out
+                      <a href="{{ route('doLogout') }}" > Log out </a>
                     </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                     <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Profile</a></li>
                     <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a></li>
                     <li class="dropdown-divider"></li>
-                    <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Log out</a></li>
+                    <li class="nav-link"> <a class="nav-item dropdown-item" href="{{ route('doLogout') }}" > Log out </a></a></li>
                 </ul>
             </li>
             <li class="separator d-lg-none"></li>

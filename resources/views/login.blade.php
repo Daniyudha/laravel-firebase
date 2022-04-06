@@ -8,9 +8,10 @@
 
 <div class="login">
     <h1>Login</h1>
-    <form method="post">
-        <input type="text" name="u" placeholder="Username" required="required" />
-        <input type="password" name="p" placeholder="Password" required="required" />
+    <form method="post" action="{{ route('doLogin') }}">
+        @csrf
+        <input type="text" name="email" placeholder="Username" required="required" />
+        <input type="password" name="password" placeholder="Password" required="required" />
         <button type="submit" class="btn btn-primary btn-block
                     btn-large">Login</button>
     </form>
