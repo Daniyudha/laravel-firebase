@@ -4963,6 +4963,11 @@ input[type="button"].btn-block {
     color: rgba(255, 255, 255, 0.65);
 }
 
+.navbar-logo {
+    max-width: 150px;
+    height: auto;
+}
+
 .card {
     position: relative;
     display: flex;

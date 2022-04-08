@@ -8,8 +8,8 @@
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg">
-    <div class="collapse navbar-collapse" id="">
-        <a class="navbar-brand">Weather Station Control</a>
+    <div class="collapse navbar-collapse container" id="">
+        <a class="navbar-brand navbar-logo"><img src="../assets/img/logo-landscape.png" alt="" srcset=""></a>
         <ul class="navbar-nav ml-auto">
             <li class="dropdown nav-item">
                 <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
