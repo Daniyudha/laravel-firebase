@@ -7,7 +7,7 @@
 @section('contents')
 
 <div class="login">
-    <h1>Login</h1>
+    <h1>Welcome to <span class="text-brand">Westco</span></h1>
     <form method="post" action="{{ route('doLogin') }}">
         @csrf
         <input type="text" name="email" placeholder="Username" required="required" />
@@ -56,6 +56,12 @@
 
 .login input:focus {
     box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.4), 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.text-brand{
+    color: #00f2c3;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 </style>
 
